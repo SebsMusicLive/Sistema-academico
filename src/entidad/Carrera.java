@@ -5,59 +5,47 @@ import java.util.*;
 /**
  * 
  */
-public class Estudiante extends Persona {
+public class Carrera {
 
     /**
      * Default constructor
      */
-    public Estudiante() {
+    public Carrera() {
     }
 
     /**
      * 
      */
-    private String codigo_estudiante;
+    private String codigo_carrera;
 
     /**
      * 
      */
-    private Carrera codigo_carrera;
+    private String nombre;
 
     /**
      * 
      */
-    private int semestre;
+    private int duracion;
+
+    /**
+     * 
+     */
+    private Departamento codigo_departamento;
 
     /**
      * @return
      */
-    public String getCodigoEstudiante() {
+    public String getCodigoCarrera() {
         // TODO implement here
         return "";
-    }
-
-    /**
-     * @param codigo_estudiante 
-     * @return
-     */
-    public void setCodigoEstudiante(String codigo_estudiante) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public Carrera getCodigoCarrera() {
-        // TODO implement here
-        return null;
     }
 
     /**
      * @param codigo_carrera 
      * @return
      */
-    public void setCodigoCarrera(Carrera codigo_carrera) {
+    public void setCodigoCarrera(String codigo_carrera) {
         // TODO implement here
         return null;
     }
@@ -65,34 +53,33 @@ public class Estudiante extends Persona {
     /**
      * @return
      */
-    public int getSemestre() {
+    public String getNombre() {
+        // TODO implement here
+        return "";
+    }
+
+    /**
+     * @param nombre 
+     * @return
+     */
+    public void setNombre(String nombre) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public int getDuracion() {
         // TODO implement here
         return 0;
     }
 
     /**
-     * @param semestre 
+     * @param duracion 
      * @return
      */
-    public void setSemestre(int semestre) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param curso 
-     * @return
-     */
-    public void inscribirseCurso(Curso curso) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param curso 
-     * @return
-     */
-    public void cancelarInscripcion(Curso curso) {
+    public void setDuracion(int duracion) {
         // TODO implement here
         return null;
     }
@@ -100,24 +87,16 @@ public class Estudiante extends Persona {
     /**
      * @return
      */
-    public HistorialAcademico consultarHistorialAcademico() {
+    public Departamento getCodigoDepartamento() {
         // TODO implement here
         return null;
     }
 
     /**
-     * @param curso 
+     * @param codigo_departamento 
      * @return
      */
-    public boolean validarPrerrequisitos(Curso curso) {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @return
-     */
-    public List<Curso> generarReporteCursosAprobados() {
+    public void setCodigoDepartamento(Departamento codigo_departamento) {
         // TODO implement here
         return null;
     }
@@ -125,7 +104,31 @@ public class Estudiante extends Persona {
     /**
      * @return
      */
-    public List<Curso> generarReporteCursosEnProceso() {
+    public void agregarCarrera() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public void modificarCarrera() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public void eliminarCarrera() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public void actualizarMallaCurricular() {
         // TODO implement here
         return null;
     }

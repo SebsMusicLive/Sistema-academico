@@ -5,42 +5,69 @@ import java.util.*;
 /**
  * 
  */
-public class Estudiante extends Persona {
+public class Asistencia {
 
     /**
      * Default constructor
      */
-    public Estudiante() {
+    public Asistencia() {
     }
 
     /**
      * 
      */
-    private String codigo_estudiante;
+    private String codigo_asistencia;
 
     /**
      * 
      */
-    private Carrera codigo_carrera;
+    private Estudiante codigo_estudiante;
 
     /**
      * 
      */
-    private int semestre;
+    private Curso codigo_curso;
+
+    /**
+     * 
+     */
+    private Date fecha;
+
+    /**
+     * 
+     */
+    private boolean presente;
 
     /**
      * @return
      */
-    public String getCodigoEstudiante() {
+    public String getCodigo_asistencia() {
         // TODO implement here
         return "";
+    }
+
+    /**
+     * @param codigo_asistencia 
+     * @return
+     */
+    public void setCodigo_asistencia(String codigo_asistencia) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public Estudiante getCodigoEstudiante() {
+        // TODO implement here
+        return null;
     }
 
     /**
      * @param codigo_estudiante 
      * @return
      */
-    public void setCodigoEstudiante(String codigo_estudiante) {
+    public void setCodigoEstudiante(Estudiante codigo_estudiante) {
         // TODO implement here
         return null;
     }
@@ -48,51 +75,16 @@ public class Estudiante extends Persona {
     /**
      * @return
      */
-    public Carrera getCodigoCarrera() {
+    public Curso getCodigoCurso() {
         // TODO implement here
         return null;
     }
 
     /**
-     * @param codigo_carrera 
+     * @param codigo_curso 
      * @return
      */
-    public void setCodigoCarrera(Carrera codigo_carrera) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public int getSemestre() {
-        // TODO implement here
-        return 0;
-    }
-
-    /**
-     * @param semestre 
-     * @return
-     */
-    public void setSemestre(int semestre) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param curso 
-     * @return
-     */
-    public void inscribirseCurso(Curso curso) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param curso 
-     * @return
-     */
-    public void cancelarInscripcion(Curso curso) {
+    public void setCodigoCurso(Curso codigo_curso) {
         // TODO implement here
         return null;
     }
@@ -100,24 +92,33 @@ public class Estudiante extends Persona {
     /**
      * @return
      */
-    public HistorialAcademico consultarHistorialAcademico() {
+    public Date getFecha() {
         // TODO implement here
         return null;
     }
 
     /**
-     * @param curso 
+     * @param fecha 
      * @return
      */
-    public boolean validarPrerrequisitos(Curso curso) {
+    public void setFecha(Date fecha) {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isPresente() {
         // TODO implement here
         return false;
     }
 
     /**
+     * @param presente 
      * @return
      */
-    public List<Curso> generarReporteCursosAprobados() {
+    public void setPresente(boolean presente) {
         // TODO implement here
         return null;
     }
@@ -125,9 +126,25 @@ public class Estudiante extends Persona {
     /**
      * @return
      */
-    public List<Curso> generarReporteCursosEnProceso() {
+    public void registrarAsistencia() {
         // TODO implement here
         return null;
+    }
+
+    /**
+     * @return
+     */
+    public void justificarInasistencias() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public String generarReporteInasistencias() {
+        // TODO implement here
+        return "";
     }
 
 }
