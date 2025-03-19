@@ -1,179 +1,144 @@
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 
  */
 public class Docente extends Persona {
 
-    /**
-     * Default constructor
-     */
-    public Docente() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_docente;
-
-    /**
-     * 
-     */
-    private Departamento codigo_departamento;
-
-    /**
-     * 
-     */
+    private String codigoDocente;
+    private Departamento departamento;
     private String titulo;
-
-    /**
-     * 
-     */
     private String especializacion;
+    private int cargaHoraria;
+    private List<Curso> cursosAsignados;
+    private List<Evaluacion> historialEvaluaciones;
 
-    /**
-     * 
-     */
-    private int carga_horaria;
+    // Constructor vacío
+    public Docente() {
+        this.cursosAsignados = new ArrayList<>();
+        this.historialEvaluaciones = new ArrayList<>();
+    }
 
-    /**
-     * @return
-     */
+    // Constructor con parámetros
+    public Docente(String documento, String tipoDocumento, String nombre, String correo, String telefono, 
+                   String direccion, Date fechaNacimiento, String codigoDocente, Departamento departamento, 
+                   String titulo, String especializacion, int cargaHoraria) {
+        super(documento, tipoDocumento, nombre, correo, telefono, direccion, fechaNacimiento);
+        this.codigoDocente = codigoDocente;
+        this.departamento = departamento;
+        this.titulo = titulo;
+        this.especializacion = especializacion;
+        setCargaHoraria(cargaHoraria);
+        this.cursosAsignados = new ArrayList<>();
+        this.historialEvaluaciones = new ArrayList<>();
+    }
+
+    // Getters y Setters
     public String getCodigoDocente() {
-        // TODO implement here
-        return "";
+        return codigoDocente;
     }
 
-    /**
-     * @param codigo_docente 
-     * @return
-     */
-    public void setCodigoDocente(String codigo_docente) {
-        // TODO implement here
-        return null;
+    public void setCodigoDocente(String codigoDocente) {
+        this.codigoDocente = codigoDocente;
     }
 
-    /**
-     * @return
-     */
-    public Departamento getCodigoDepartamento() {
-        // TODO implement here
-        return null;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    /**
-     * @param codigo_departamento 
-     * @return
-     */
-    public void setCodigoDepartamento(Departamento codigo_departamento) {
-        // TODO implement here
-        return null;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
-    /**
-     * @return
-     */
     public String getTitulo() {
-        // TODO implement here
-        return "";
+        return titulo;
     }
 
-    /**
-     * @param titulo 
-     * @return
-     */
     public void setTitulo(String titulo) {
-        // TODO implement here
-        return null;
+        this.titulo = titulo;
     }
 
-    /**
-     * @return
-     */
     public String getEspecializacion() {
-        // TODO implement here
-        return "";
+        return especializacion;
     }
 
-    /**
-     * @param especializacion 
-     * @return
-     */
     public void setEspecializacion(String especializacion) {
-        // TODO implement here
-        return null;
+        this.especializacion = especializacion;
     }
 
-    /**
-     * @return
-     */
     public int getCargaHoraria() {
-        // TODO implement here
-        return 0;
+        return cargaHoraria;
     }
 
-    /**
-     * @param carga_horaria 
-     * @return
-     */
-    public void setCargaHoraria(int carga_horaria) {
-        // TODO implement here
-        return null;
+    public void setCargaHoraria(int cargaHoraria) {
+        if (cargaHoraria >= 0) {
+            this.cargaHoraria = cargaHoraria;
+        } else {
+            System.out.println("Error: La carga horaria no puede ser negativa.");
+        }
     }
 
-    /**
-     * @param curso 
-     * @return
-     */
+    public List<Curso> getCursosAsignados() {
+        return cursosAsignados;
+    }
+
+    public List<Evaluacion> getHistorialEvaluaciones() {
+        return historialEvaluaciones;
+    }
+
+    // Métodos funcionales
     public void asignarCurso(Curso curso) {
-        // TODO implement here
-        return null;
+        if (!cursosAsignados.contains(curso)) {
+            cursosAsignados.add(curso);
+            System.out.println("El docente " + getNombre() + " ha sido asignado al curso: " + curso.getNombre());
+        } else {
+            System.out.println("El docente ya está asignado a este curso.");
+        }
     }
 
-    /**
-     * @param curso 
-     * @return
-     */
-    public void generarEvaluacion(Curso curso) {
-        // TODO implement here
-        return null;
+    public void generarEvaluacion(Curso curso, String nombreEvaluacion) {
+        Evaluacion evaluacion = new Evaluacion(nombreEvaluacion, curso);
+        historialEvaluaciones.add(evaluacion);
+        System.out.println("Evaluación '" + nombreEvaluacion + "' creada para el curso: " + curso.getNombre());
     }
 
-    /**
-     * @param estudiante 
-     * @param evaluacion 
-     * @param nota 
-     * @return
-     */
     public void registrarCalificacion(Estudiante estudiante, Evaluacion evaluacion, float nota) {
-        // TODO implement here
-        return null;
+        if (nota < 0 || nota > 5) {
+            System.out.println("Error: La nota debe estar entre 0 y 5.");
+            return;
+        }
+        System.out.println("Registrando calificación de " + nota + " para el estudiante " + estudiante.getNombre() 
+                           + " en la evaluación '" + evaluacion.getNombre() + "'.");
     }
 
-    /**
-     * @return
-     */
     public boolean validarDisponibilidad() {
-        // TODO implement here
-        return false;
+        boolean disponible = cargaHoraria < 40;
+        System.out.println("Disponibilidad del docente " + getNombre() + ": " + (disponible ? "Disponible" : "No disponible"));
+        return disponible;
     }
 
-    /**
-     * @return
-     */
-    public List<Curso> generarReporteCursosAsignados() {
-        // TODO implement here
-        return null;
+    public void mostrarCursosAsignados() {
+        System.out.println("Cursos asignados a " + getNombre() + ":");
+        if (cursosAsignados.isEmpty()) {
+            System.out.println("Ninguno.");
+        } else {
+            for (Curso curso : cursosAsignados) {
+                System.out.println("- " + curso.getNombre());
+            }
+        }
     }
 
-    /**
-     * @return
-     */
-    public List<Evaluacion> HistorialEvaluaciones() {
-        // TODO implement here
-        return null;
+    public void mostrarHistorialEvaluaciones() {
+        System.out.println("Historial de evaluaciones de " + getNombre() + ":");
+        if (historialEvaluaciones.isEmpty()) {
+            System.out.println("Ninguna evaluación registrada.");
+        } else {
+            for (Evaluacion evaluacion : historialEvaluaciones) {
+                System.out.println("- " + evaluacion.getNombre() + " (Curso: " + evaluacion.getCurso().getNombre() + ")");
+            }
+        }
     }
-
 }

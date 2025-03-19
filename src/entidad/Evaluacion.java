@@ -1,182 +1,100 @@
 
-import java.io.*;
-import java.util.*;
 
+import java.util.Date;
 /**
  * 
  */
 public class Evaluacion {
 
-    /**
-     * Default constructor
-     */
-    public Evaluacion() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_evaluacion;
-
-    /**
-     * 
-     */
+    private String codigoEvaluacion;
     private String tipo;
-
-    /**
-     * 
-     */
     private float ponderacion;
-
-    /**
-     * 
-     */
-    private Curso codigo_curso;
-
-    /**
-     * 
-     */
+    private Curso curso;
     private Date fecha;
 
-    /**
-     * @return
-     */
+    public Evaluacion(String codigoEvaluacion, String tipo, float ponderacion, Curso curso, Date fecha) {
+        this.codigoEvaluacion = codigoEvaluacion;
+        this.tipo = tipo;
+        this.ponderacion = ponderacion;
+        this.curso = curso;
+        this.fecha = fecha;
+    }
+
     public String getCodigoEvaluacion() {
-        // TODO implement here
-        return "";
+        return codigoEvaluacion;
     }
 
-    /**
-     * @param codigo_evaluacion 
-     * @return
-     */
-    public void setCodigoEvaluacion(String codigo_evaluacion) {
-        // TODO implement here
-        return null;
+    public void setCodigoEvaluacion(String codigoEvaluacion) {
+        this.codigoEvaluacion = codigoEvaluacion;
     }
 
-    /**
-     * @return
-     */
     public String getTipo() {
-        // TODO implement here
-        return "";
+        return tipo;
     }
 
-    /**
-     * @param tipo 
-     * @return
-     */
     public void setTipo(String tipo) {
-        // TODO implement here
-        return null;
+        this.tipo = tipo;
     }
 
-    /**
-     * @return
-     */
     public float getPonderacion() {
-        // TODO implement here
-        return 0.0f;
+        return ponderacion;
     }
 
-    /**
-     * @param ponderacion 
-     * @return
-     */
     public void setPonderacion(float ponderacion) {
-        // TODO implement here
-        return null;
+        if (ponderacion >= 0 && ponderacion <= 100) {
+            this.ponderacion = ponderacion;
+        } else {
+            throw new IllegalArgumentException("La ponderación debe estar entre 0 y 100.");
+        }
     }
 
-    /**
-     * @return
-     */
-    public Curso getCodigoCurso() {
-        // TODO implement here
-        return null;
+    public Curso getCurso() {
+        return curso;
     }
 
-    /**
-     * @param codigo_curso 
-     * @return
-     */
-    public void setCodigoCurso(Curso codigo_curso) {
-        // TODO implement here
-        return null;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
-    /**
-     * @return
-     */
-    public void crearEvaluacion() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public void eliminarEvaluacion() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public void modificarEvaluacion() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public Evaluacion consultarEvaluacion() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public void crearRubrica() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public void publicarResultados() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public void aplicarEvaluacion() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
     public Date getFecha() {
-        // TODO implement here
-        return null;
+        return fecha;
     }
 
-    /**
-     * @param fecha 
-     * @return
-     */
     public void setFecha(Date fecha) {
-        // TODO implement here
-        return null;
+        this.fecha = fecha;
     }
 
+    public void crearEvaluacion() {
+        System.out.println("Evaluación creada: " + this.codigoEvaluacion);
+    }
+
+    public void eliminarEvaluacion() {
+        System.out.println("Evaluación eliminada: " + this.codigoEvaluacion);
+    }
+
+    public void modificarEvaluacion(String nuevoTipo, float nuevaPonderacion, Date nuevaFecha) {
+        this.tipo = nuevoTipo;
+        setPonderacion(nuevaPonderacion);
+        this.fecha = nuevaFecha;
+        System.out.println("Evaluación modificada: " + this.codigoEvaluacion);
+    }
+
+    public void publicarResultados() {
+        System.out.println("Resultados de la evaluación " + this.codigoEvaluacion + " publicados.");
+    }
+
+    public void aplicarEvaluacion() {
+        System.out.println("Evaluación " + this.codigoEvaluacion + " aplicada.");
+    }
+
+    @Override
+    public String toString() {
+        return "Evaluacion{" +
+                "codigoEvaluacion='" + codigoEvaluacion + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", ponderacion=" + ponderacion +
+                ", curso=" + curso.getNombre() +
+                ", fecha=" + fecha +
+                '}';
+    }
 }

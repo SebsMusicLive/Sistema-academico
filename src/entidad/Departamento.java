@@ -1,115 +1,91 @@
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
  */
 public class Departamento {
 
-    /**
-     * Default constructor
-     */
-    public Departamento() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_departamento;
-
-    /**
-     * 
-     */
+    private String codigoDepartamento;
     private String nombre;
+    private Facultad facultad;
+    private List<Docente> docentes;
 
-    /**
-     * 
-     */
-    private Facultad codigo_facultad;
+    // Constructor vacío
+    public Departamento() {
+        this.docentes = new ArrayList<>();
+    }
 
-    /**
-     * @return
-     */
+    // Constructor con parámetros
+    public Departamento(String codigoDepartamento, String nombre, Facultad facultad) {
+        this.codigoDepartamento = codigoDepartamento;
+        this.nombre = nombre;
+        this.facultad = facultad;
+        this.docentes = new ArrayList<>();
+    }
+
+    // Getters y Setters
     public String getCodigoDepartamento() {
-        // TODO implement here
-        return "";
+        return codigoDepartamento;
     }
 
-    /**
-     * @param codigo_departamento 
-     * @return
-     */
-    public void setCodigoDepartamento(String codigo_departamento) {
-        // TODO implement here
-        return null;
+    public void setCodigoDepartamento(String codigoDepartamento) {
+        this.codigoDepartamento = codigoDepartamento;
     }
 
-    /**
-     * @return
-     */
     public String getNombre() {
-        // TODO implement here
-        return "";
+        return nombre;
     }
 
-    /**
-     * @param nombre 
-     * @return
-     */
     public void setNombre(String nombre) {
-        // TODO implement here
-        return null;
+        this.nombre = nombre;
     }
 
-    /**
-     * @return
-     */
-    public Facultad getCodigoFacultad() {
-        // TODO implement here
-        return null;
+    public Facultad getFacultad() {
+        return facultad;
     }
 
-    /**
-     * @param codigo_facultad 
-     * @return
-     */
-    public void setCodigoFacultad(Facultad codigo_facultad) {
-        // TODO implement here
-        return null;
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
     }
 
-    /**
-     * @return
-     */
+    public List<Docente> getDocentes() {
+        return docentes;
+    }
+
+    // Métodos de gestión del departamento
     public void agregarDepartamento() {
-        // TODO implement here
-        return null;
+        System.out.println("Departamento '" + nombre + "' agregado correctamente.");
     }
 
-    /**
-     * @return
-     */
-    public void modificarDepartamento() {
-        // TODO implement here
-        return null;
+    public void modificarDepartamento(String nuevoNombre, Facultad nuevaFacultad) {
+        this.nombre = nuevoNombre;
+        this.facultad = nuevaFacultad;
+        System.out.println("Departamento actualizado: " + nombre);
     }
 
-    /**
-     * @return
-     */
     public void eliminarDepartamento() {
-        // TODO implement here
-        return null;
+        System.out.println("Departamento '" + nombre + "' eliminado.");
     }
 
-    /**
-     * @param docente 
-     * @return
-     */
     public void asignarDocente(Docente docente) {
-        // TODO implement here
-        return null;
+        if (!docentes.contains(docente)) {
+            docentes.add(docente);
+            System.out.println("Docente " + docente.getNombre() + " asignado al departamento " + nombre);
+        } else {
+            System.out.println("El docente ya pertenece a este departamento.");
+        }
     }
 
+    public void listarDocentes() {
+        System.out.println("Docentes en el departamento " + nombre + ":");
+        if (docentes.isEmpty()) {
+            System.out.println("No hay docentes asignados.");
+        } else {
+            for (Docente docente : docentes) {
+                System.out.println("- " + docente.getNombre());
+            }
+        }
+    }
 }

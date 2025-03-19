@@ -1,17 +1,24 @@
 package entidad;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class Curso {
     private String codigo;
     private String nombre;
     private int cupos;
     private List<Estudiante> estudiantesInscritos;
+    private List<Evaluacion> evaluaciones;
+    private List<Curso> prerrequisitos;
 
     public Curso(String codigo, String nombre, int cupos) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cupos = cupos;
+        this.estudiantesInscritos = new ArrayList<>();
+        this.evaluaciones = new ArrayList<>();
+        this.prerrequisitos = new ArrayList<>();
     }
 
     public String getCodigo() {
@@ -39,7 +46,8 @@ public class Curso {
     }
 
     public boolean inscribirEstudiante(Estudiante estudiante){
-        if(cupos > 0 && !estudiantesInscritos.contains(estudiante)){
+        if (validarCupos() && !estudiantesInscritos.contains(estudiante)) {
+            estudiantesInscritos.add(estudiante);
             cupos--;
             return true;
         }
@@ -47,12 +55,41 @@ public class Curso {
     }
 
     public boolean cancelarInscripcion(Estudiante estudiante){
-        if(estudiantesInscritos.remove(estudiante)){
+        if (estudiantesInscritos.remove(estudiante)) {
             cupos++;
             return true;
         }
         return false;
     }
 
+    public boolean validarCupos() {
+        return cupos > 0;
+    }
 
+    public List<Estudiante> listarEstudiantes() {
+        return estudiantesInscritos;
+    }
+
+    public void agregarPrerrequisito(Curso prerrequisito) {
+        if (!prerrequisitos.contains(prerrequisito)) {
+            prerrequisitos.add(prerrequisito);
+        }
+    }
+
+    public boolean validarPrerrequisitos(Estudiante estudiante) {
+        for (Curso prerrequisito : prerrequisitos) {
+            if (!estudiante.haCursado(prerrequisito)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void agregarEvaluacion(Evaluacion evaluacion) {
+        evaluaciones.add(evaluacion);
+    }
+
+    public List<Evaluacion> obtenerEvaluaciones() {
+        return evaluaciones;
+    }
 }

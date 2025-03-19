@@ -1,133 +1,115 @@
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 
  */
 public class Estudiante extends Persona {
 
-    /**
-     * Default constructor
-     */
-    public Estudiante() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_estudiante;
-
-    /**
-     * 
-     */
-    private Carrera codigo_carrera;
-
-    /**
-     * 
-     */
+   private String codigoEstudiante;
+    private Carrera carrera;
     private int semestre;
+    private List<Curso> cursosInscritos; // Lista de cursos en los que está inscrito
 
-    /**
-     * @return
-     */
+    public Estudiante() {
+        this.cursosInscritos = new ArrayList<>();
+    }
+
+    public Estudiante(String documento, String tipoDocumento, String nombre, String correo, String telefono, 
+                      String direccion, Date fechaNacimiento, String codigoEstudiante, Carrera carrera, int semestre) {
+        super(documento, tipoDocumento, nombre, correo, telefono, direccion, fechaNacimiento);
+        this.codigoEstudiante = codigoEstudiante;
+        this.carrera = carrera;
+        this.semestre = semestre;
+        this.cursosInscritos = new ArrayList<>();
+    }
+
     public String getCodigoEstudiante() {
-        // TODO implement here
-        return "";
+        return codigoEstudiante;
     }
 
-    /**
-     * @param codigo_estudiante 
-     * @return
-     */
-    public void setCodigoEstudiante(String codigo_estudiante) {
-        // TODO implement here
-        return null;
+    public void setCodigoEstudiante(String codigoEstudiante) {
+        this.codigoEstudiante = codigoEstudiante;
     }
 
-    /**
-     * @return
-     */
-    public Carrera getCodigoCarrera() {
-        // TODO implement here
-        return null;
+    public Carrera getCarrera() {
+        return carrera;
     }
 
-    /**
-     * @param codigo_carrera 
-     * @return
-     */
-    public void setCodigoCarrera(Carrera codigo_carrera) {
-        // TODO implement here
-        return null;
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
     }
 
-    /**
-     * @return
-     */
     public int getSemestre() {
-        // TODO implement here
-        return 0;
+        return semestre;
     }
 
-    /**
-     * @param semestre 
-     * @return
-     */
     public void setSemestre(int semestre) {
-        // TODO implement here
-        return null;
+        this.semestre = semestre;
     }
 
-    /**
-     * @param curso 
-     * @return
-     */
-    public void inscribirseCurso(Curso curso) {
-        // TODO implement here
-        return null;
+    public List<Curso> getCursosInscritos() {
+        return cursosInscritos;
     }
 
-    /**
-     * @param curso 
-     * @return
-     */
-    public void cancelarInscripcion(Curso curso) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public HistorialAcademico consultarHistorialAcademico() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param curso 
-     * @return
-     */
-    public boolean validarPrerrequisitos(Curso curso) {
-        // TODO implement here
+    public boolean inscribirseCurso(Curso curso) {
+        if (curso.getCupos() > 0 && !cursosInscritos.contains(curso)) {
+            if (validarPrerrequisitos(curso)) {
+                curso.inscribirEstudiante(this);
+                cursosInscritos.add(curso);
+                System.out.println("Estudiante " + getNombre() + " inscrito en " + curso.getNombre());
+                return true;
+            } else {
+                System.out.println("No cumple con los prerrequisitos para " + curso.getNombre());
+            }
+        } else {
+            System.out.println("No hay cupos o ya está inscrito en " + curso.getNombre());
+        }
         return false;
     }
 
-    /**
-     * @return
-     */
+    public boolean cancelarInscripcion(Curso curso) {
+        if (cursosInscritos.contains(curso)) {
+            curso.cancelarInscripcion(this);
+            cursosInscritos.remove(curso);
+            System.out.println("Inscripción cancelada en " + curso.getNombre());
+            return true;
+        } else {
+            System.out.println("No está inscrito en " + curso.getNombre());
+            return false;
+        }
+    }
+
+    public HistorialAcademico consultarHistorialAcademico() {
+        System.out.println("Consultando historial académico de " + getNombre());
+        return new HistorialAcademico();
+    }
+
+    public boolean validarPrerrequisitos(Curso curso) {
+        // Aquí se validaría si el estudiante ha aprobado cursos previos requeridos
+        System.out.println("Validando prerrequisitos para " + curso.getNombre());
+        return true;
+    }
+
     public List<Curso> generarReporteCursosAprobados() {
-        // TODO implement here
-        return null;
+        System.out.println("Generando reporte de cursos aprobados...");
+        return new ArrayList<>();
     }
 
-    /**
-     * @return
-     */
     public List<Curso> generarReporteCursosEnProceso() {
-        // TODO implement here
-        return null;
+        System.out.println("Generando reporte de cursos en proceso...");
+        return new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "codigoEstudiante='" + codigoEstudiante + '\'' +
+                ", carrera=" + (carrera != null ? carrera.getNombre() : "No asignada") +
+                ", semestre=" + semestre +
+                ", cursosInscritos=" + cursosInscritos.size() +
+                '}';
+    }
 }

@@ -1,194 +1,137 @@
 
-import java.io.*;
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * 
  */
 public class Persona {
-
-    /**
-     * Default constructor
-     */
-    public Persona() {
-    }
-
-    /**
-     * 
-     */
-    private String documento;
-
-    /**
-     * 
-     */
-    private String tipo_documento;
-
-    /**
-     * 
-     */
+ private String documento;
+    private String tipoDocumento;
     private String nombre;
-
-    /**
-     * 
-     */
     private String correo;
-
-    /**
-     * 
-     */
     private String telefono;
-
-    /**
-     * 
-     */
     private String direccion;
+    private Date fechaNacimiento;
 
-    /**
-     * 
-     */
-    private Date fecha_nacimiento;
+    // Constructor vacío
+    public Persona() {}
 
-    /**
-     * @return
-     */
+    // Constructor con parámetros
+    public Persona(String documento, String tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
+        this.documento = documento;
+        this.tipoDocumento = tipoDocumento;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    // Getters y Setters
     public String getDocumento() {
-        // TODO implement here
-        return "";
+        return documento;
     }
 
-    /**
-     * @param documento 
-     * @return
-     */
     public void setDocumento(String documento) {
-        // TODO implement here
-        return null;
+        this.documento = documento;
     }
 
-    /**
-     * @return
-     */
     public String getTipoDocumento() {
-        // TODO implement here
-        return "";
+        return tipoDocumento;
     }
 
-    /**
-     * @param tipo_documento 
-     * @return
-     */
-    public void setTipoDocumento(String tipo_documento) {
-        // TODO implement here
-        return null;
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
-    /**
-     * @return
-     */
     public String getNombre() {
-        // TODO implement here
-        return "";
+        return nombre;
     }
 
-    /**
-     * @param nombre 
-     * @return
-     */
     public void setNombre(String nombre) {
-        // TODO implement here
-        return null;
+        this.nombre = nombre;
     }
 
-    /**
-     * @return
-     */
     public String getCorreo() {
-        // TODO implement here
-        return "";
+        return correo;
     }
 
-    /**
-     * @param correo 
-     * @return
-     */
     public void setCorreo(String correo) {
-        // TODO implement here
-        return null;
+        if (correo.contains("@")) {
+            this.correo = correo;
+        } else {
+            System.out.println("Correo inválido. Debe contener '@'.");
+        }
     }
 
-    /**
-     * @return
-     */
     public String getTelefono() {
-        // TODO implement here
-        return "";
+        return telefono;
     }
 
-    /**
-     * @param telefono 
-     * @return
-     */
     public void setTelefono(String telefono) {
-        // TODO implement here
-        return null;
+        if (telefono.matches("\\d{10}")) { // Verifica que tenga 10 dígitos
+            this.telefono = telefono;
+        } else {
+            System.out.println("Número de teléfono inválido. Debe contener 10 dígitos.");
+        }
     }
 
-    /**
-     * @return
-     */
     public String getDireccion() {
-        // TODO implement here
-        return "";
+        return direccion;
     }
 
-    /**
-     * @param direccion 
-     * @return
-     */
     public void setDireccion(String direccion) {
-        // TODO implement here
-        return null;
+        this.direccion = direccion;
     }
 
-    /**
-     * @return
-     */
     public Date getFechaNacimiento() {
-        // TODO implement here
-        return null;
+        return fechaNacimiento;
     }
 
-    /**
-     * @param fecha_nacimiento 
-     * @return
-     */
-    public void setFechaNacimiento(Date fecha_nacimiento) {
-        // TODO implement here
-        return null;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    /**
-     * @return
-     */
+    // Métodos de gestión de datos
     public void registrarDatos() {
-        // TODO implement here
-        return null;
+        System.out.println("Registrando datos de la persona: " + this.nombre);
+        // Aquí podrías agregar lógica para guardar en una base de datos
     }
 
-    /**
-     * @return
-     */
-    public void actualizarDatos() {
-        // TODO implement here
-        return null;
+    public void actualizarDatos(String nuevoCorreo, String nuevoTelefono, String nuevaDireccion) {
+        setCorreo(nuevoCorreo);
+        setTelefono(nuevoTelefono);
+        setDireccion(nuevaDireccion);
+        System.out.println("Datos actualizados para: " + this.nombre);
     }
 
-    /**
-     * @return
-     */
     public void eliminarDatos() {
-        // TODO implement here
-        return null;
+        System.out.println("Eliminando datos de la persona: " + this.nombre);
+        this.documento = null;
+        this.tipoDocumento = null;
+        this.nombre = null;
+        this.correo = null;
+        this.telefono = null;
+        this.direccion = null;
+        this.fechaNacimiento = null;
+        System.out.println("Datos eliminados correctamente.");
     }
 
+    // Método para mostrar información
+    public void mostrarInformacion() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaNac = (fechaNacimiento != null) ? sdf.format(fechaNacimiento) : "No registrada";
+
+        System.out.println("----- Información de la Persona -----");
+        System.out.println("Documento: " + (documento != null ? documento : "No registrado"));
+        System.out.println("Tipo de Documento: " + (tipoDocumento != null ? tipoDocumento : "No registrado"));
+        System.out.println("Nombre: " + (nombre != null ? nombre : "No registrado"));
+        System.out.println("Correo: " + (correo != null ? correo : "No registrado"));
+        System.out.println("Teléfono: " + (telefono != null ? telefono : "No registrado"));
+        System.out.println("Dirección: " + (direccion != null ? direccion : "No registrada"));
+        System.out.println("Fecha de Nacimiento: " + fechaNac);
+        System.out.println("------------------------------------");
+    }
 }

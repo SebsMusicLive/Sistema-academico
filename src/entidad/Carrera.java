@@ -1,136 +1,107 @@
+import java.util.ArrayList;
+import java.util.List;
 
-import java.io.*;
-import java.util.*;
 
 /**
  * 
  */
 public class Carrera {
 
-    /**
-     * Default constructor
-     */
-    public Carrera() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_carrera;
-
-    /**
-     * 
-     */
+     private String codigoCarrera;
     private String nombre;
+    private int duracion; // Duración en semestres
+    private Departamento departamento;
+    private List<String> mallaCurricular;
 
-    /**
-     * 
-     */
-    private int duracion;
+    // Constructor vacío
+    public Carrera() {
+        this.mallaCurricular = new ArrayList<>();
+    }
 
-    /**
-     * 
-     */
-    private Departamento codigo_departamento;
+    // Constructor con parámetros
+    public Carrera(String codigoCarrera, String nombre, int duracion, Departamento departamento) {
+        this.codigoCarrera = codigoCarrera;
+        this.nombre = nombre;
+        setDuracion(duracion);
+        this.departamento = departamento;
+        this.mallaCurricular = new ArrayList<>();
+    }
 
-    /**
-     * @return
-     */
+    // Getters y Setters
     public String getCodigoCarrera() {
-        // TODO implement here
-        return "";
+        return codigoCarrera;
     }
 
-    /**
-     * @param codigo_carrera 
-     * @return
-     */
-    public void setCodigoCarrera(String codigo_carrera) {
-        // TODO implement here
-        return null;
+    public void setCodigoCarrera(String codigoCarrera) {
+        this.codigoCarrera = codigoCarrera;
     }
 
-    /**
-     * @return
-     */
     public String getNombre() {
-        // TODO implement here
-        return "";
+        return nombre;
     }
 
-    /**
-     * @param nombre 
-     * @return
-     */
     public void setNombre(String nombre) {
-        // TODO implement here
-        return null;
+        this.nombre = nombre;
     }
 
-    /**
-     * @return
-     */
     public int getDuracion() {
-        // TODO implement here
-        return 0;
+        return duracion;
     }
 
-    /**
-     * @param duracion 
-     * @return
-     */
     public void setDuracion(int duracion) {
-        // TODO implement here
-        return null;
+        if (duracion > 0) {
+            this.duracion = duracion;
+        } else {
+            System.out.println("Error: La duración debe ser mayor a 0.");
+        }
     }
 
-    /**
-     * @return
-     */
-    public Departamento getCodigoDepartamento() {
-        // TODO implement here
-        return null;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    /**
-     * @param codigo_departamento 
-     * @return
-     */
-    public void setCodigoDepartamento(Departamento codigo_departamento) {
-        // TODO implement here
-        return null;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
-    /**
-     * @return
-     */
+    public List<String> getMallaCurricular() {
+        return mallaCurricular;
+    }
+
+    // Métodos de gestión de carrera
     public void agregarCarrera() {
-        // TODO implement here
-        return null;
+        System.out.println("Carrera '" + nombre + "' agregada correctamente.");
     }
 
-    /**
-     * @return
-     */
-    public void modificarCarrera() {
-        // TODO implement here
-        return null;
+    public void modificarCarrera(String nuevoNombre, int nuevaDuracion, Departamento nuevoDepartamento) {
+        this.nombre = nuevoNombre;
+        setDuracion(nuevaDuracion);
+        this.departamento = nuevoDepartamento;
+        System.out.println("Carrera actualizada: " + nombre);
     }
 
-    /**
-     * @return
-     */
     public void eliminarCarrera() {
-        // TODO implement here
-        return null;
+        System.out.println("Carrera '" + nombre + "' eliminada.");
     }
 
-    /**
-     * @return
-     */
-    public void actualizarMallaCurricular() {
-        // TODO implement here
-        return null;
+    public void actualizarMallaCurricular(String materia) {
+        if (!mallaCurricular.contains(materia)) {
+            mallaCurricular.add(materia);
+            System.out.println("Materia '" + materia + "' añadida a la malla curricular de " + nombre);
+        } else {
+            System.out.println("La materia ya está en la malla curricular.");
+        }
+    }
+
+    public void mostrarMallaCurricular() {
+        System.out.println("Malla curricular de la carrera " + nombre + ":");
+        if (mallaCurricular.isEmpty()) {
+            System.out.println("No hay materias registradas.");
+        } else {
+            for (String materia : mallaCurricular) {
+                System.out.println("- " + materia);
+            }
+        }
     }
 
 }
