@@ -1,183 +1,99 @@
 
-import java.io.*;
-import java.util.*;
+import java.sql.Time;
 
 /**
  * 
  */
 public class Horario {
-
-    /**
-     * Default constructor
-     */
-    public Horario() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_horario;
-
-    /**
-     * 
-     */
-    private Curso codigo_curso;
-
-    /**
-     * 
-     */
+private String codigoHorario;
+    private Curso curso;
     private String dia;
+    private Time horaInicio;
+    private Time horaFin;
+    private String tipoSesion;
 
-    /**
-     * 
-     */
-    private Time hora_inicio;
-
-    /**
-     * 
-     */
-    private Time hora_fin;
-
-    /**
-     * 
-     */
-    private String tipo_sesion;
-
-    /**
-     * @return
-     */
-    public String getCodigo_horario() {
-        // TODO implement here
-        return "";
+    public Horario(String codigoHorario, Curso curso, String dia, Time horaInicio, Time horaFin, String tipoSesion) {
+        this.codigoHorario = codigoHorario;
+        this.curso = curso;
+        this.dia = dia;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.tipoSesion = tipoSesion;
     }
 
-    /**
-     * @param codigo_horario 
-     * @return
-     */
-    public void setCodigo_horario(String codigo_horario) {
-        // TODO implement here
-        return null;
+    public String getCodigoHorario() {
+        return codigoHorario;
     }
 
-    /**
-     * @return
-     */
-    public Curso getCodigoCurso() {
-        // TODO implement here
-        return null;
+    public void setCodigoHorario(String codigoHorario) {
+        this.codigoHorario = codigoHorario;
     }
 
-    /**
-     * @param codigo_curso 
-     * @return
-     */
-    public void setCodigoCurso(Curso codigo_curso) {
-        // TODO implement here
-        return null;
+    public Curso getCurso() {
+        return curso;
     }
 
-    /**
-     * @return
-     */
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
     public String getDia() {
-        // TODO implement here
-        return "";
+        return dia;
     }
 
-    /**
-     * @param dia 
-     * @return
-     */
     public void setDia(String dia) {
-        // TODO implement here
-        return null;
+        this.dia = dia;
     }
 
-    /**
-     * @return
-     */
     public Time getHoraInicio() {
-        // TODO implement here
-        return null;
+        return horaInicio;
     }
 
-    /**
-     * @param hora_inicio 
-     * @return
-     */
-    public void setHoraInicio(Time hora_inicio) {
-        // TODO implement here
-        return null;
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    /**
-     * @return
-     */
     public Time getHoraFin() {
-        // TODO implement here
-        return null;
+        return horaFin;
     }
 
-    /**
-     * @param hora_fin 
-     * @return
-     */
-    public void setHoraFin(Time hora_fin) {
-        // TODO implement here
-        return null;
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
     }
 
-    /**
-     * @return
-     */
     public String getTipoSesion() {
-        // TODO implement here
-        return "";
+        return tipoSesion;
     }
 
-    /**
-     * @param tipo_sesion 
-     * @return
-     */
-    public void setTipoSesion(String tipo_sesion) {
-        // TODO implement here
-        return null;
+    public void setTipoSesion(String tipoSesion) {
+        this.tipoSesion = tipoSesion;
     }
 
-    /**
-     * @param dia 
-     * @param hora_inicio 
-     * @param hora_fin 
-     * @return
-     */
-    public void modificarHorario(String dia, Time hora_inicio, Time hora_fin) {
-        // TODO implement here
-        return null;
+    public void modificarHorario(String dia, Time horaInicio, Time horaFin) {
+        this.dia = dia;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        System.out.println("Horario modificado: " + this.codigoHorario);
     }
 
-    /**
-     * @return
-     */
-    public void asignarHorario() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
     public boolean verificarDisponibilidad() {
-        // TODO implement here
-        return false;
+        System.out.println("Verificando disponibilidad del horario...");
+        return true; // Aquí podrías agregar lógica para verificar conflictos
     }
 
-    /**
-     * @return
-     */
     public void optimizarUsoRecursos() {
-        // TODO implement here
-        return null;
+        System.out.println("Optimizando el uso de recursos para el horario " + this.codigoHorario);
     }
 
+    @Override
+    public String toString() {
+        return "Horario{" +
+                "codigoHorario='" + codigoHorario + '\'' +
+                ", curso=" + curso.getNombre() +
+                ", dia='" + dia + '\'' +
+                ", horaInicio=" + horaInicio +
+                ", horaFin=" + horaFin +
+                ", tipoSesion='" + tipoSesion + '\'' +
+                '}';
+    }
 }

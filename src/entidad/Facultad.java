@@ -1,101 +1,68 @@
+import java.util.ArrayList;
+import java.util.List;
 
-import java.io.*;
-import java.util.*;
 
-/**
- * 
- */
 public class Facultad {
-
-    /**
-     * Default constructor
-     */
-    public Facultad() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_facultad;
-
-    /**
-     * 
-     */
+    private String codigoFacultad;
     private String nombre;
+    private List<Departamento> departamentos;
 
-    /**
-     * @return
-     */
+    // Constructor vacío
+    public Facultad() {
+        this.departamentos = new ArrayList<>();
+    }
+
+    // Constructor con parámetros
+    public Facultad(String codigoFacultad, String nombre) {
+        this.codigoFacultad = codigoFacultad;
+        this.nombre = nombre;
+        this.departamentos = new ArrayList<>();
+    }
+
+    // Getters y Setters
     public String getCodigoFacultad() {
-        // TODO implement here
-        return "";
+        return codigoFacultad;
     }
 
-    /**
-     * @param codigo_facultad 
-     * @return
-     */
-    public void setCodigoFacultad(String codigo_facultad) {
-        // TODO implement here
-        return null;
+    public void setCodigoFacultad(String codigoFacultad) {
+        this.codigoFacultad = codigoFacultad;
     }
 
-    /**
-     * @return
-     */
     public String getNombre() {
-        // TODO implement here
-        return "";
+        return nombre;
     }
 
-    /**
-     * @param nombre 
-     * @return
-     */
     public void setNombre(String nombre) {
-        // TODO implement here
-        return null;
+        this.nombre = nombre;
     }
 
-    /**
-     * @return
-     */
+    public List<Departamento> getDepartamentos() {
+        return departamentos;
+    }
+
+    // Métodos funcionales
     public void agregarFacultad() {
-        // TODO implement here
-        return null;
+        System.out.println("Facultad " + nombre + " agregada con éxito.");
     }
 
-    /**
-     * @return
-     */
-    public void modificarFacultad() {
-        // TODO implement here
-        return null;
+    public void modificarFacultad(String nuevoNombre) {
+        this.nombre = nuevoNombre;
+        System.out.println("Facultad modificada. Nuevo nombre: " + nuevoNombre);
     }
 
-    /**
-     * @return
-     */
     public void eliminarFacultad() {
-        // TODO implement here
-        return null;
+        System.out.println("Facultad " + nombre + " eliminada.");
     }
 
-    /**
-     * @param nombre 
-     * @return
-     */
-    public void crearDepartamento(String nombre) {
-        // TODO implement here
-        return null;
+    public void crearDepartamento(String nombreDepartamento) {
+        Departamento nuevoDepartamento = new Departamento();
+        nuevoDepartamento.setNombre(nombreDepartamento);
+        departamentos.add(nuevoDepartamento);
+        System.out.println("Departamento " + nombreDepartamento + " agregado a la facultad " + nombre);
     }
 
-    /**
-     * @return
-     */
     public String generarReporteEstadistico() {
-        // TODO implement here
-        return "";
+        return "Reporte de Facultad: " + nombre + "\nCódigo: " + codigoFacultad + 
+               "\nTotal de Departamentos: " + departamentos.size();
     }
-
 }

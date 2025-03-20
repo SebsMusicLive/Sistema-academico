@@ -1,13 +1,15 @@
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
+
 
 
 /**
  * 
  */
 public class Persona {
- private String documento;
+  private String documento;
     private String tipoDocumento;
     private String nombre;
     private String correo;
@@ -15,21 +17,18 @@ public class Persona {
     private String direccion;
     private Date fechaNacimiento;
 
-    // Constructor vacío
     public Persona() {}
 
-    // Constructor con parámetros
     public Persona(String documento, String tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
         this.documento = documento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
-        this.correo = correo;
-        this.telefono = telefono;
+        setCorreo(correo);
+        setTelefono(telefono);
         this.direccion = direccion;
-        this.fechaNacimiento = fechaNacimiento;
+        setFechaNacimiento(fechaNacimiento);
     }
 
-    // Getters y Setters
     public String getDocumento() {
         return documento;
     }
@@ -59,10 +58,10 @@ public class Persona {
     }
 
     public void setCorreo(String correo) {
-        if (correo.contains("@")) {
+        if (Pattern.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", correo)) {
             this.correo = correo;
         } else {
-            System.out.println("Correo inválido. Debe contener '@'.");
+            throw new IllegalArgumentException("Correo inválido. Debe tener un formato válido.");
         }
     }
 
@@ -71,10 +70,10 @@ public class Persona {
     }
 
     public void setTelefono(String telefono) {
-        if (telefono.matches("\\d{10}")) { // Verifica que tenga 10 dígitos
+        if (Pattern.matches("\\d{10}", telefono)) {
             this.telefono = telefono;
         } else {
-            System.out.println("Número de teléfono inválido. Debe contener 10 dígitos.");
+            throw new IllegalArgumentException("Número de teléfono inválido. Debe contener 10 dígitos.");
         }
     }
 
@@ -91,13 +90,15 @@ public class Persona {
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+        if (fechaNacimiento != null && fechaNacimiento.before(new Date())) {
+            this.fechaNacimiento = fechaNacimiento;
+        } else {
+            throw new IllegalArgumentException("Fecha de nacimiento inválida.");
+        }
     }
 
-    // Métodos de gestión de datos
     public void registrarDatos() {
         System.out.println("Registrando datos de la persona: " + this.nombre);
-        // Aquí podrías agregar lógica para guardar en una base de datos
     }
 
     public void actualizarDatos(String nuevoCorreo, String nuevoTelefono, String nuevaDireccion) {
@@ -108,30 +109,28 @@ public class Persona {
     }
 
     public void eliminarDatos() {
-        System.out.println("Eliminando datos de la persona: " + this.nombre);
-        this.documento = null;
-        this.tipoDocumento = null;
-        this.nombre = null;
-        this.correo = null;
-        this.telefono = null;
-        this.direccion = null;
+        this.documento = "";
+        this.tipoDocumento = "";
+        this.nombre = "";
+        this.correo = "";
+        this.telefono = "";
+        this.direccion = "";
         this.fechaNacimiento = null;
         System.out.println("Datos eliminados correctamente.");
     }
 
-    // Método para mostrar información
-    public void mostrarInformacion() {
+    @Override
+    public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaNac = (fechaNacimiento != null) ? sdf.format(fechaNacimiento) : "No registrada";
-
-        System.out.println("----- Información de la Persona -----");
-        System.out.println("Documento: " + (documento != null ? documento : "No registrado"));
-        System.out.println("Tipo de Documento: " + (tipoDocumento != null ? tipoDocumento : "No registrado"));
-        System.out.println("Nombre: " + (nombre != null ? nombre : "No registrado"));
-        System.out.println("Correo: " + (correo != null ? correo : "No registrado"));
-        System.out.println("Teléfono: " + (telefono != null ? telefono : "No registrado"));
-        System.out.println("Dirección: " + (direccion != null ? direccion : "No registrada"));
-        System.out.println("Fecha de Nacimiento: " + fechaNac);
-        System.out.println("------------------------------------");
+        return "Persona{" +
+                "documento='" + documento + '\'' +
+                ", tipoDocumento='" + tipoDocumento + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", fechaNacimiento=" + fechaNac +
+                '}';
     }
 }

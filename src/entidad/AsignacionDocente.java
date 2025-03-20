@@ -1,129 +1,70 @@
+import java.util.Date;
 
-import java.io.*;
-import java.util.*;
-
-/**
- * 
- */
 public class AsignacionDocente {
-
-    /**
-     * Default constructor
-     */
-    public AsignacionDocente() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_asignacionDocente;
-
-    /**
-     * 
-     */
+    private String codigoAsignacionDocente;
     private Date fecha;
+    private Docente docente;
+    private Curso curso;
 
-    /**
-     * 
-     */
-    private Docente codigo_docente;
-
-    /**
-     * 
-     */
-    private Curso codigo_curso;
-
-    /**
-     * @return
-     */
-    public String getCodigo_asignacionDocente() {
-        // TODO implement here
-        return "";
+    public AsignacionDocente(String codigoAsignacionDocente, Date fecha, Docente docente, Curso curso) {
+        this.codigoAsignacionDocente = codigoAsignacionDocente;
+        this.fecha = fecha;
+        this.docente = docente;
+        this.curso = curso;
     }
 
-    /**
-     * @param codigo 
-     * @return
-     */
-    public void setCodigo_asignacionDocente(String codigo) {
-        // TODO implement here
-        return null;
+    public String getCodigoAsignacionDocente() {
+        return codigoAsignacionDocente;
     }
 
-    /**
-     * @return
-     */
+    public void setCodigoAsignacionDocente(String codigo) {
+        this.codigoAsignacionDocente = codigo;
+    }
+
     public Date getFecha() {
-        // TODO implement here
-        return null;
+        return fecha;
     }
 
-    /**
-     * @param fecha 
-     * @return
-     */
     public void setFecha(Date fecha) {
-        // TODO implement here
-        return null;
+        this.fecha = fecha;
     }
 
-    /**
-     * @return
-     */
-    public Docente getCodigoDocente() {
-        // TODO implement here
-        return null;
+    public Docente getDocente() {
+        return docente;
     }
 
-    /**
-     * @param codigo_docente 
-     * @return
-     */
-    public void setCodigoDocente(Docente codigo_docente) {
-        // TODO implement here
-        return null;
+    public void setDocente(Docente docente) {
+        this.docente = docente;
     }
 
-    /**
-     * @return
-     */
-    public Curso getCodigoCurso() {
-        // TODO implement here
-        return null;
+    public Curso getCurso() {
+        return curso;
     }
 
-    /**
-     * @param codigo_curso 
-     * @return
-     */
-    public void setCodigoCurso(Curso codigo_curso) {
-        // TODO implement here
-        return null;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
-    /**
-     * @return
-     */
     public void asignarCurso() {
-        // TODO implement here
-        return null;
+        if (verificarDisponibilidad()) {
+            docente.asignarCurso(curso);
+            docente.setCargaHoraria(docente.getCargaHoraria() + curso.getCupos());
+            System.out.println("El curso " + curso.getNombre() + " ha sido asignado al docente " + docente.getNombre());
+        } else {
+            System.out.println("El docente " + docente.getNombre() + " no tiene disponibilidad para este curso.");
+        }
     }
 
-    /**
-     * @return
-     */
     public boolean verificarDisponibilidad() {
-        // TODO implement here
-        return false;
+        return docente.getCargaHoraria() + curso.getCupos() <= 40; // Suponiendo 40 horas como límite
     }
 
-    /**
-     * @param nueva_carga 
-     * @return
-     */
-    public void ajustarCargaHoraria(int nueva_carga) {
-        // TODO implement here
-        return null;
+    public void ajustarCargaHoraria(int nuevaCarga) {
+        if (nuevaCarga > 0) {
+            curso.setCupos(nuevaCarga);
+            System.out.println("La carga horaria del curso " + curso.getNombre() + " ha sido ajustada a " + nuevaCarga + " horas.");
+        } else {
+            System.out.println("La carga horaria no puede ser negativa o cero.");
+        }
     }
-
 }
