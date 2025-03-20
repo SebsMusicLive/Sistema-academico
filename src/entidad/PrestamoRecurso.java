@@ -6,162 +6,88 @@ import java.util.*;
  * 
  */
 public class PrestamoRecurso {
+private String codigo_prestamoRecurso;
+    private RecursoAcademico codigo_recurso;
+    private Usuario codigo_usuario;
+    private Date fecha_prestamo;
+    private Date fecha_devolucion;
 
-    /**
-     * Default constructor
-     */
     public PrestamoRecurso() {
     }
 
-    /**
-     * 
-     */
-    private String codigo_prestamoRecurso;
-
-    /**
-     * 
-     */
-    private RecursoAcademico codigo_recurso;
-
-    /**
-     * 
-     */
-    private Usuario codigo_usuario;
-
-    /**
-     * 
-     */
-    private Date fecha_prestamo;
-
-    /**
-     * 
-     */
-    private Date fecha_devolucion;
-
-    /**
-     * @return
-     */
     public String getCodigo_prestamoRecurso() {
-        // TODO implement here
-        return "";
+        return codigo_prestamoRecurso;
     }
 
-    /**
-     * @param codigo_prestamoRecurso 
-     * @return
-     */
     public void setCodigo_prestamoRecurso(String codigo_prestamoRecurso) {
-        // TODO implement here
-        return null;
+        this.codigo_prestamoRecurso = codigo_prestamoRecurso;
     }
 
-    /**
-     * @return
-     */
     public RecursoAcademico getCodigoRecurso() {
-        // TODO implement here
-        return null;
+        return codigo_recurso;
     }
 
-    /**
-     * @param codigo_recurso 
-     * @return
-     */
     public void setCodigoRecurso(RecursoAcademico codigo_recurso) {
-        // TODO implement here
-        return null;
+        this.codigo_recurso = codigo_recurso;
     }
 
-    /**
-     * @return
-     */
     public Usuario getCodigoUsuario() {
-        // TODO implement here
-        return null;
+        return codigo_usuario;
     }
 
-    /**
-     * @param codigo_usuario 
-     * @return
-     */
     public void setCodigoUsuario(Usuario codigo_usuario) {
-        // TODO implement here
-        return null;
+        this.codigo_usuario = codigo_usuario;
     }
 
-    /**
-     * @return
-     */
     public Date getFechaPrestamo() {
-        // TODO implement here
-        return null;
+        return fecha_prestamo;
     }
 
-    /**
-     * @param fecha_prestamo 
-     * @return
-     */
     public void setFechaPrestamo(Date fecha_prestamo) {
-        // TODO implement here
-        return null;
+        this.fecha_prestamo = fecha_prestamo;
     }
 
-    /**
-     * @return
-     */
     public Date getFechaDevolucion() {
-        // TODO implement here
-        return null;
+        return fecha_devolucion;
     }
 
-    /**
-     * @param fecha_devolucion 
-     * @return
-     */
     public void setFechaDevolucion(Date fecha_devolucion) {
-        // TODO implement here
-        return null;
+        this.fecha_devolucion = fecha_devolucion;
     }
 
-    /**
-     * @return
-     */
     public void registrarPrestamo() {
-        // TODO implement here
-        return null;
+        this.fecha_prestamo = new Date();
+        System.out.println("Préstamo registrado: " + this.codigo_prestamoRecurso);
     }
 
-    /**
-     * @return
-     */
     public void devolverRecurso() {
-        // TODO implement here
-        return null;
+        this.fecha_devolucion = new Date();
+        System.out.println("Recurso devuelto: " + this.codigo_prestamoRecurso);
     }
 
-    /**
-     * @param dias_extra 
-     * @return
-     */
     public void extenderPlazo(int dias_extra) {
-        // TODO implement here
-        return null;
+        if (fecha_devolucion != null) {
+            long tiempoExtra = dias_extra * 24L * 60 * 60 * 1000;
+            this.fecha_devolucion = new Date(this.fecha_devolucion.getTime() + tiempoExtra);
+            System.out.println("Plazo extendido en " + dias_extra + " días.");
+        } else {
+            System.out.println("No se puede extender el plazo sin fecha de devolución establecida.");
+        }
     }
 
-    /**
-     * @return
-     */
     public float generarMulta() {
-        // TODO implement here
+        Date actual = new Date();
+        if (fecha_devolucion != null && actual.after(fecha_devolucion)) {
+            long diasRetraso = (actual.getTime() - fecha_devolucion.getTime()) / (24 * 60 * 60 * 1000);
+            float multa = diasRetraso * 5.0f; // Multa de 5 unidades por día de retraso
+            System.out.println("Multa generada: " + multa);
+            return multa;
+        }
         return 0.0f;
     }
 
-    /**
-     * @return
-     */
     public void motivoprestamo() {
-        // TODO implement here
-        return null;
+        System.out.println("Motivo del préstamo registrado para el recurso: " + codigo_recurso);
     }
 
 }

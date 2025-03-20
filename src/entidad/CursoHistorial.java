@@ -5,139 +5,106 @@ import java.util.*;
 /**
  * 
  */
-public class CursoHistorial {
-
-    /**
-     * Default constructor
-     */
-    public CursoHistorial() {
-    }
-
-    /**
-     * 
-     */
-    private String codigo_curso_historial;
-
-    /**
-     * 
-     */
-    private HistorialAcademico codigo_historial_academico;
-
-    /**
-     * 
-     */
+ private String codigo_recursoAcademico;
+    private String titulo;
+    private String tipo;
     private Curso codigo_curso;
+    private String nombre;
+    private boolean disponibilidad;
+    private String ubicacion;
+    private String tipo_espacio;
 
-    /**
-     * 
-     */
-    private EstadoCurso estado_curso;
-
-    /**
-     * 
-     */
-    private float calificacion_final;
-
-    /**
-     * @return
-     */
-    public String getCodigoCursoHistorial() {
-        // TODO implement here
-        return "";
+    public RecursoAcademico() {
     }
 
-    /**
-     * @param codigo_curso_historial 
-     * @return
-     */
-    public void setCodigoCursoHistorial(String codigo_curso_historial) {
-        // TODO implement here
-        return null;
+    public String getCodigo_recursoAcademico() {
+        return codigo_recursoAcademico;
     }
 
-    /**
-     * @return
-     */
-    public HistorialAcademico getCodigoHistorialAcademico() {
-        // TODO implement here
-        return null;
+    public void setCodigo_recursoAcademico(String codigo_recursoAcademico) {
+        this.codigo_recursoAcademico = codigo_recursoAcademico;
     }
 
-    /**
-     * @param codigo_historial_academico 
-     * @return
-     */
-    public void setCodigoHistorialAcademico(HistorialAcademico codigo_historial_academico) {
-        // TODO implement here
-        return null;
+    public String getTitulo() {
+        return titulo;
     }
 
-    /**
-     * @return
-     */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public Curso getCodigoCurso() {
-        // TODO implement here
-        return null;
+        return codigo_curso;
     }
 
-    /**
-     * @param codigo_curso 
-     * @return
-     */
     public void setCodigoCurso(Curso codigo_curso) {
-        // TODO implement here
-        return null;
+        this.codigo_curso = codigo_curso;
     }
 
-    /**
-     * @return
-     */
-    public EstadoCurso getEstadoCurso() {
-        // TODO implement here
-        return null;
+    public String getNombre() {
+        return nombre;
     }
 
-    /**
-     * @param estado_curso 
-     * @return
-     */
-    public void setEstadoCurso(EstadoCurso estado_curso) {
-        // TODO implement here
-        return null;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    /**
-     * @return
-     */
-    public float getCalificacionFinal() {
-        // TODO implement here
-        return 0.0f;
+    public boolean getDisponibilidad() {
+        return disponibilidad;
     }
 
-    /**
-     * @param calificacion_final 
-     * @return
-     */
-    public void setCalificacionFinal(float calificacion_final) {
-        // TODO implement here
-        return null;
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
-    /**
-     * @return
-     */
-    public void registrarEstado() {
-        // TODO implement here
-        return null;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    /**
-     * @param nota 
-     * @return
-     */
-    public void actualizarCalificacion(float nota) {
-        // TODO implement here
-        return null;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getTipoEspacio() {
+        return tipo_espacio;
+    }
+
+    public void setTipoEspacio(String tipo_espacio) {
+        this.tipo_espacio = tipo_espacio;
+    }
+
+    public void agregarRecurso() {
+        System.out.println("Recurso agregado exitosamente.");
+    }
+
+    public void eliminarRecurso() {
+        System.out.println("Recurso eliminado exitosamente.");
+    }
+
+    public void reservarRecurso(Date fecha, String hora) {
+        if (disponibilidad) {
+            disponibilidad = false;
+            System.out.println("Recurso reservado para el " + fecha + " a las " + hora);
+        } else {
+            System.out.println("El recurso no está disponible para reserva.");
+        }
+    }
+
+    public boolean verificarDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void gestionarMantenimiento() {
+        System.out.println("El recurso está en mantenimiento.");
+        disponibilidad = false;
     }
 
 }
