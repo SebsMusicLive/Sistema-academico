@@ -7,188 +7,87 @@ import java.util.*;
  */
 public class Notificacion {
 
-    /**
-     * Default constructor
-     */
-    public Notificacion() {
-    }
-
-    /**
-     * 
-     */
     private String codigo_notificacion;
-
-    /**
-     * 
-     */
     private Usuario codigo_usuario;
-
-    /**
-     * 
-     */
     private String mensaje;
-
-    /**
-     * 
-     */
     private Date fecha_envio;
-
-    /**
-     * 
-     */
     private String tipo;
-
-    /**
-     * 
-     */
     private String estado;
-
-    /**
-     * 
-     */
     private Usuario destinatario;
 
-    /**
-     * @return
-     */
+    public Notificacion() {
+        this.estado = "No Leída";
+    }
+
     public String getCodigo_notificacion() {
-        // TODO implement here
-        return "";
+        return codigo_notificacion;
     }
 
-    /**
-     * @param codigo_notificacion 
-     * @return
-     */
     public void setCodigo_notificacion(String codigo_notificacion) {
-        // TODO implement here
-        return null;
+        this.codigo_notificacion = codigo_notificacion;
     }
 
-    /**
-     * @return
-     */
     public Usuario getCodigoUsuario() {
-        // TODO implement here
-        return null;
+        return codigo_usuario;
     }
 
-    /**
-     * @param codigo_usuario 
-     * @return
-     */
     public void setCodigoUsuario(Usuario codigo_usuario) {
-        // TODO implement here
-        return null;
+        this.codigo_usuario = codigo_usuario;
     }
 
-    /**
-     * @return
-     */
     public String getMensaje() {
-        // TODO implement here
-        return "";
+        return mensaje;
     }
 
-    /**
-     * @param mensaje 
-     * @return
-     */
     public void setMensaje(String mensaje) {
-        // TODO implement here
-        return null;
+        this.mensaje = mensaje;
     }
 
-    /**
-     * @return
-     */
     public Date getFechaEnvio() {
-        // TODO implement here
-        return null;
+        return fecha_envio;
     }
 
-    /**
-     * @param fecha_envio 
-     * @return
-     */
     public void setFechaEnvio(Date fecha_envio) {
-        // TODO implement here
-        return null;
+        this.fecha_envio = fecha_envio;
     }
 
-    /**
-     * @return
-     */
     public String getTipo() {
-        // TODO implement here
-        return "";
+        return tipo;
     }
 
-    /**
-     * @param tipo 
-     * @return
-     */
     public void setTipo(String tipo) {
-        // TODO implement here
-        return null;
+        this.tipo = tipo;
     }
 
-    /**
-     * @return
-     */
     public String getEstado() {
-        // TODO implement here
-        return "";
+        return estado;
     }
 
-    /**
-     * @param estado 
-     * @return
-     */
     public void setEstado(String estado) {
-        // TODO implement here
-        return null;
+        this.estado = estado;
     }
 
-    /**
-     * @return
-     */
     public Usuario getDestinatario() {
-        // TODO implement here
-        return null;
+        return destinatario;
     }
 
-    /**
-     * @param destinatario 
-     * @return
-     */
     public void setDestinatario(Usuario destinatario) {
-        // TODO implement here
-        return null;
+        this.destinatario = destinatario;
     }
 
-    /**
-     * @return
-     */
     public void enviarNotificacion() {
-        // TODO implement here
-        return null;
+        this.fecha_envio = new Date(); // Establece la fecha de envío como la actual
+        System.out.println("Notificación enviada a: " + destinatario.getNombre());
+        System.out.println("Mensaje: " + mensaje);
     }
 
-    /**
-     * @return
-     */
     public void marcarComoLeida() {
-        // TODO implement here
-        return null;
+        this.estado = "Leída";
+        System.out.println("La notificación ha sido marcada como leída.");
     }
 
-    /**
-     * @return
-     */
     public void programarNotificacionAutomatica() {
-        // TODO implement here
-        return null;
+        System.out.println("Notificación programada para ser enviada automáticamente.");
     }
 
 }
