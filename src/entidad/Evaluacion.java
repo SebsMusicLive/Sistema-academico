@@ -9,17 +9,22 @@ public class Evaluacion {
     private String codigoEvaluacion;
     private String tipo;
     private float ponderacion;
-    private Curso curso;
+    private Curso codigoCurso;
     private Date fecha;
 
-    public Evaluacion(String codigoEvaluacion, String tipo, float ponderacion, Curso curso, Date fecha) {
+    // Constructor por defecto
+    public Evaluacion() {}
+
+    // Constructor con parámetros
+    public Evaluacion(String codigoEvaluacion, String tipo, float ponderacion, Curso codigoCurso, Date fecha) {
         this.codigoEvaluacion = codigoEvaluacion;
         this.tipo = tipo;
-        this.ponderacion = ponderacion;
-        this.curso = curso;
+        this.ponderacion = Math.max(0, Math.min(ponderacion, 100)); // La ponderación no puede ser negativa ni mayor a 100
+        this.codigoCurso = codigoCurso;
         this.fecha = fecha;
     }
 
+    // Getters y Setters con validaciones
     public String getCodigoEvaluacion() {
         return codigoEvaluacion;
     }
@@ -33,7 +38,9 @@ public class Evaluacion {
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        if (tipo != null && !tipo.isEmpty()) {
+            this.tipo = tipo;
+        }
     }
 
     public float getPonderacion() {
@@ -43,17 +50,15 @@ public class Evaluacion {
     public void setPonderacion(float ponderacion) {
         if (ponderacion >= 0 && ponderacion <= 100) {
             this.ponderacion = ponderacion;
-        } else {
-            throw new IllegalArgumentException("La ponderación debe estar entre 0 y 100.");
         }
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Curso getCodigoCurso() {
+        return codigoCurso;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCodigoCurso(Curso codigoCurso) {
+        this.codigoCurso = codigoCurso;
     }
 
     public Date getFecha() {
@@ -64,8 +69,9 @@ public class Evaluacion {
         this.fecha = fecha;
     }
 
+    // Métodos funcionales
     public void crearEvaluacion() {
-        System.out.println("Evaluación creada: " + this.codigoEvaluacion);
+        System.out.println("Evaluación creada: " + this.codigoEvaluacion + " - " + this.tipo);
     }
 
     public void eliminarEvaluacion() {
@@ -73,28 +79,34 @@ public class Evaluacion {
     }
 
     public void modificarEvaluacion(String nuevoTipo, float nuevaPonderacion, Date nuevaFecha) {
-        this.tipo = nuevoTipo;
+        setTipo(nuevoTipo);
         setPonderacion(nuevaPonderacion);
-        this.fecha = nuevaFecha;
+        setFecha(nuevaFecha);
         System.out.println("Evaluación modificada: " + this.codigoEvaluacion);
     }
 
+    public Evaluacion consultarEvaluacion() {
+        return this;
+    }
+
+    public void crearRubrica() {
+        System.out.println("Rúbrica creada para la evaluación: " + this.codigoEvaluacion);
+    }
+
     public void publicarResultados() {
-        System.out.println("Resultados de la evaluación " + this.codigoEvaluacion + " publicados.");
+        System.out.println("Resultados publicados para la evaluación: " + this.codigoEvaluacion);
     }
 
     public void aplicarEvaluacion() {
-        System.out.println("Evaluación " + this.codigoEvaluacion + " aplicada.");
+        System.out.println("Evaluación aplicada: " + this.codigoEvaluacion);
     }
 
-    @Override
-    public String toString() {
-        return "Evaluacion{" +
-                "codigoEvaluacion='" + codigoEvaluacion + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", ponderacion=" + ponderacion +
-                ", curso=" + curso.getNombre() +
-                ", fecha=" + fecha +
-                '}';
+    // Método para mostrar información detallada
+    public void mostrarInformacion() {
+        System.out.println("Código Evaluación: " + codigoEvaluacion);
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Ponderación: " + ponderacion + "%");
+        System.out.println("Curso: " + (codigoCurso != null ? codigoCurso.getNombre() : "No asignado"));
+        System.out.println("Fecha: " + fecha);
     }
 }

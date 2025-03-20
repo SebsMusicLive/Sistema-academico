@@ -4,16 +4,22 @@ import java.util.Date;
 public class AsignacionDocente {
     private String codigoAsignacionDocente;
     private Date fecha;
-    private Docente docente;
-    private Curso curso;
+    private Docente codigoDocente;
+    private Curso codigoCurso;
+    private int cargaHoraria; // Nueva variable para almacenar la carga horaria
 
-    public AsignacionDocente(String codigoAsignacionDocente, Date fecha, Docente docente, Curso curso) {
-        this.codigoAsignacionDocente = codigoAsignacionDocente;
-        this.fecha = fecha;
-        this.docente = docente;
-        this.curso = curso;
+    public AsignacionDocente() {
     }
 
+    public AsignacionDocente(String codigoAsignacionDocente, Date fecha, Docente codigoDocente, Curso codigoCurso, int cargaHoraria) {
+        this.codigoAsignacionDocente = codigoAsignacionDocente;
+        this.fecha = fecha;
+        this.codigoDocente = codigoDocente;
+        this.codigoCurso = codigoCurso;
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    // Getters y Setters
     public String getCodigoAsignacionDocente() {
         return codigoAsignacionDocente;
     }
@@ -30,42 +36,55 @@ public class AsignacionDocente {
         this.fecha = fecha;
     }
 
-    public Docente getDocente() {
-        return docente;
+    public Docente getCodigoDocente() {
+        return codigoDocente;
     }
 
-    public void setDocente(Docente docente) {
-        this.docente = docente;
+    public void setCodigoDocente(Docente codigoDocente) {
+        this.codigoDocente = codigoDocente;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Curso getCodigoCurso() {
+        return codigoCurso;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCodigoCurso(Curso codigoCurso) {
+        this.codigoCurso = codigoCurso;
     }
 
+    public int getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    // Métodos funcionales
     public void asignarCurso() {
-        if (verificarDisponibilidad()) {
-            docente.asignarCurso(curso);
-            docente.setCargaHoraria(docente.getCargaHoraria() + curso.getCupos());
-            System.out.println("El curso " + curso.getNombre() + " ha sido asignado al docente " + docente.getNombre());
+        if (codigoDocente == null || codigoCurso == null) {
+            System.out.println("No se puede asignar un curso sin un docente o curso válido.");
         } else {
-            System.out.println("El docente " + docente.getNombre() + " no tiene disponibilidad para este curso.");
+            System.out.println("Docente " + codigoDocente.getNombre() + " asignado al curso " + codigoCurso.getNombre());
         }
     }
 
     public boolean verificarDisponibilidad() {
-        return docente.getCargaHoraria() + curso.getCupos() <= 40; // Suponiendo 40 horas como límite
+        int cargaMaxima = 40; // Suponiendo que la carga máxima del docente es 40 horas
+        return (cargaHoraria <= cargaMaxima);
     }
 
     public void ajustarCargaHoraria(int nuevaCarga) {
-        if (nuevaCarga > 0) {
-            curso.setCupos(nuevaCarga);
-            System.out.println("La carga horaria del curso " + curso.getNombre() + " ha sido ajustada a " + nuevaCarga + " horas.");
-        } else {
-            System.out.println("La carga horaria no puede ser negativa o cero.");
-        }
+        this.cargaHoraria = nuevaCarga;
+        System.out.println("Carga horaria ajustada a: " + nuevaCarga + " horas.");
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Código de Asignación: " + codigoAsignacionDocente);
+        System.out.println("Fecha: " + fecha);
+        System.out.println("Docente: " + (codigoDocente != null ? codigoDocente.getNombre() : "No asignado"));
+        System.out.println("Curso: " + (codigoCurso != null ? codigoCurso.getNombre() : "No asignado"));
+        System.out.println("Carga Horaria: " + cargaHoraria + " horas.");
+        System.out.println("Disponibilidad: " + (verificarDisponibilidad() ? "Disponible" : "Excede el límite"));
     }
 }

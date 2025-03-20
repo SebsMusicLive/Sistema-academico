@@ -6,21 +6,26 @@ import java.sql.Time;
  */
 public class Horario {
 private String codigoHorario;
-    private Curso curso;
+    private Curso codigoCurso;
     private String dia;
-    private Time horaInicio;
-    private Time horaFin;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
     private String tipoSesion;
 
-    public Horario(String codigoHorario, Curso curso, String dia, Time horaInicio, Time horaFin, String tipoSesion) {
+    // Constructor por defecto
+    public Horario() {}
+
+    // Constructor con parámetros
+    public Horario(String codigoHorario, Curso codigoCurso, String dia, LocalTime horaInicio, LocalTime horaFin, String tipoSesion) {
         this.codigoHorario = codigoHorario;
-        this.curso = curso;
-        this.dia = dia;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+        this.codigoCurso = codigoCurso;
+        setDia(dia);
+        setHoraInicio(horaInicio);
+        setHoraFin(horaFin);
         this.tipoSesion = tipoSesion;
     }
 
+    // Getters y Setters con validaciones
     public String getCodigoHorario() {
         return codigoHorario;
     }
@@ -29,12 +34,12 @@ private String codigoHorario;
         this.codigoHorario = codigoHorario;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Curso getCodigoCurso() {
+        return codigoCurso;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCodigoCurso(Curso codigoCurso) {
+        this.codigoCurso = codigoCurso;
     }
 
     public String getDia() {
@@ -42,22 +47,35 @@ private String codigoHorario;
     }
 
     public void setDia(String dia) {
-        this.dia = dia;
+        String[] diasValidos = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"};
+        for (String d : diasValidos) {
+            if (d.equalsIgnoreCase(dia)) {
+                this.dia = d;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Día inválido. Debe ser un día de la semana.");
     }
 
-    public Time getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
+        if (horaFin != null && horaInicio.isAfter(horaFin)) {
+            throw new IllegalArgumentException("La hora de inicio no puede ser después de la hora de fin.");
+        }
         this.horaInicio = horaInicio;
     }
 
-    public Time getHoraFin() {
+    public LocalTime getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Time horaFin) {
+    public void setHoraFin(LocalTime horaFin) {
+        if (horaInicio != null && horaFin.isBefore(horaInicio)) {
+            throw new IllegalArgumentException("La hora de fin no puede ser antes de la hora de inicio.");
+        }
         this.horaFin = horaFin;
     }
 
@@ -69,31 +87,34 @@ private String codigoHorario;
         this.tipoSesion = tipoSesion;
     }
 
-    public void modificarHorario(String dia, Time horaInicio, Time horaFin) {
-        this.dia = dia;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+    // Métodos funcionales
+    public void modificarHorario(String nuevoDia, LocalTime nuevaHoraInicio, LocalTime nuevaHoraFin) {
+        setDia(nuevoDia);
+        setHoraInicio(nuevaHoraInicio);
+        setHoraFin(nuevaHoraFin);
         System.out.println("Horario modificado: " + this.codigoHorario);
     }
 
+    public void asignarHorario() {
+        System.out.println("Horario asignado: " + this.codigoHorario);
+    }
+
     public boolean verificarDisponibilidad() {
-        System.out.println("Verificando disponibilidad del horario...");
-        return true; // Aquí podrías agregar lógica para verificar conflictos
+        // Implementación de verificación de disponibilidad
+        return true;  // Retorna true si está disponible (esto debe mejorarse con lógica real)
     }
 
     public void optimizarUsoRecursos() {
-        System.out.println("Optimizando el uso de recursos para el horario " + this.codigoHorario);
+        System.out.println("Optimización de recursos realizada para el horario: " + this.codigoHorario);
     }
 
-    @Override
-    public String toString() {
-        return "Horario{" +
-                "codigoHorario='" + codigoHorario + '\'' +
-                ", curso=" + curso.getNombre() +
-                ", dia='" + dia + '\'' +
-                ", horaInicio=" + horaInicio +
-                ", horaFin=" + horaFin +
-                ", tipoSesion='" + tipoSesion + '\'' +
-                '}';
+    // Método para mostrar información detallada
+    public void mostrarInformacion() {
+        System.out.println("Código Horario: " + codigoHorario);
+        System.out.println("Curso: " + (codigoCurso != null ? codigoCurso.getNombre() : "No asignado"));
+        System.out.println("Día: " + dia);
+        System.out.println("Hora Inicio: " + horaInicio);
+        System.out.println("Hora Fin: " + horaFin);
+        System.out.println("Tipo de Sesión: " + tipoSesion);
     }
 }

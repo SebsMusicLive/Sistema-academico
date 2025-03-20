@@ -5,28 +5,56 @@ import java.util.ArrayList;
 
 
 public class Curso {
-    private String codigo;
+ private String codigoCurso;
     private String nombre;
-    private int cupos;
+    private int creditos;
+    private int horasTeoricas;
+    private int horasPracticas;
+    private Docente codigoDocente;
+    private Carrera codigoCarrera;
+    private Curso codigoPrerrequisito;
+    private Programa codigoPrograma;
+    private Semestre codigoSemestre;
+    private String tipoCurso;
+    private String contenidos;
+    private String objetivos;
+    private String competencias;
     private List<Estudiante> estudiantesInscritos;
-    private List<Evaluacion> evaluaciones;
     private List<Curso> prerrequisitos;
 
-    public Curso(String codigo, String nombre, int cupos) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.cupos = cupos;
+    public Curso() {
         this.estudiantesInscritos = new ArrayList<>();
-        this.evaluaciones = new ArrayList<>();
         this.prerrequisitos = new ArrayList<>();
     }
 
-    public String getCodigoCurso() {
-        return codigo;
+    public Curso(String codigoCurso, String nombre, int creditos, int horasTeoricas, int horasPracticas,
+                 Docente codigoDocente, Carrera codigoCarrera, Curso codigoPrerrequisito, Programa codigoPrograma,
+                 Semestre codigoSemestre, String tipoCurso, String contenidos, String objetivos, String competencias) {
+        this.codigoCurso = codigoCurso;
+        this.nombre = nombre;
+        this.creditos = creditos;
+        this.horasTeoricas = horasTeoricas;
+        this.horasPracticas = horasPracticas;
+        this.codigoDocente = codigoDocente;
+        this.codigoCarrera = codigoCarrera;
+        this.codigoPrerrequisito = codigoPrerrequisito;
+        this.codigoPrograma = codigoPrograma;
+        this.codigoSemestre = codigoSemestre;
+        this.tipoCurso = tipoCurso;
+        this.contenidos = contenidos;
+        this.objetivos = objetivos;
+        this.competencias = competencias;
+        this.estudiantesInscritos = new ArrayList<>();
+        this.prerrequisitos = new ArrayList<>();
     }
 
-    public void setCodigoCurso(String codigo) {
-        this.codigo = codigo;
+    // Getters y Setters
+    public String getCodigoCurso() {
+        return codigoCurso;
+    }
+
+    public void setCodigoCurso(String codigoCurso) {
+        this.codigoCurso = codigoCurso;
     }
 
     public String getNombre() {
@@ -37,8 +65,8 @@ public class Curso {
         this.nombre = nombre;
     }
 
-    public int getCupos() {
-        return cupos;
+    public int getCreditos() {
+        return creditos;
     }
 
     public String getCodigo() {
@@ -49,51 +77,156 @@ public class Curso {
         this.cupos = cupos;
     }
 
-    public boolean inscribirEstudiante(Estudiante estudiante){
-        if (validarCupos() && !estudiantesInscritos.contains(estudiante)) {
-            estudiantesInscritos.add(estudiante);
-            cupos--;
-            return true;
-        }
-        return false;
+    public int getHorasTeoricas() {
+        return horasTeoricas;
     }
 
-    public boolean cancelarInscripcion(Estudiante estudiante){
-        if (estudiantesInscritos.remove(estudiante)) {
-            cupos++;
-            return true;
-        }
-        return false;
+    public void setHorasTeoricas(int horasTeoricas) {
+        this.horasTeoricas = horasTeoricas;
     }
 
-    public boolean validarCupos() {
-        return cupos > 0;
+    public int getHorasPracticas() {
+        return horasPracticas;
     }
 
-    public List<Estudiante> listarEstudiantes() {
+    public void setHorasPracticas(int horasPracticas) {
+        this.horasPracticas = horasPracticas;
+    }
+
+    public Docente getCodigoDocente() {
+        return codigoDocente;
+    }
+
+    public void setCodigoDocente(Docente codigoDocente) {
+        this.codigoDocente = codigoDocente;
+    }
+
+    public Carrera getCodigoCarrera() {
+        return codigoCarrera;
+    }
+
+    public void setCodigoCarrera(Carrera codigoCarrera) {
+        this.codigoCarrera = codigoCarrera;
+    }
+
+    public Curso getCodigoPrerrequisito() {
+        return codigoPrerrequisito;
+    }
+
+    public void setCodigoPrerrequisito(Curso codigoPrerrequisito) {
+        this.codigoPrerrequisito = codigoPrerrequisito;
+    }
+
+    public Programa getCodigoPrograma() {
+        return codigoPrograma;
+    }
+
+    public void setCodigoPrograma(Programa codigoPrograma) {
+        this.codigoPrograma = codigoPrograma;
+    }
+
+    public Semestre getCodigoSemestre() {
+        return codigoSemestre;
+    }
+
+    public void setCodigoSemestre(Semestre codigoSemestre) {
+        this.codigoSemestre = codigoSemestre;
+    }
+
+    public String getTipoCurso() {
+        return tipoCurso;
+    }
+
+    public void setTipoCurso(String tipoCurso) {
+        this.tipoCurso = tipoCurso;
+    }
+
+    public String getContenidos() {
+        return contenidos;
+    }
+
+    public void setContenidos(String contenidos) {
+        this.contenidos = contenidos;
+    }
+
+    public String getObjetivos() {
+        return objetivos;
+    }
+
+    public void setObjetivos(String objetivos) {
+        this.objetivos = objetivos;
+    }
+
+    public String getCompetencias() {
+        return competencias;
+    }
+
+    public void setCompetencias(String competencias) {
+        this.competencias = competencias;
+    }
+
+    public List<Estudiante> getEstudiantesInscritos() {
         return estudiantesInscritos;
+    }
+
+    public List<Curso> getPrerrequisitos() {
+        return prerrequisitos;
+    }
+
+    // Métodos funcionales
+    public void inscribirEstudiante(Estudiante estudiante) {
+        if (!validarPrerrequisitos(estudiante)) {
+            System.out.println("El estudiante " + estudiante.getNombre() + " no cumple con los prerrequisitos.");
+            return;
+        }
+        if (!validarCupos()) {
+            System.out.println("No hay cupos disponibles para el curso " + this.nombre);
+            return;
+        }
+        estudiantesInscritos.add(estudiante);
+        System.out.println("Estudiante " + estudiante.getNombre() + " inscrito en el curso " + this.nombre);
     }
 
     public void agregarPrerrequisito(Curso prerrequisito) {
         if (!prerrequisitos.contains(prerrequisito)) {
             prerrequisitos.add(prerrequisito);
+            System.out.println("Prerrequisito " + prerrequisito.getNombre() + " agregado al curso " + this.nombre);
         }
     }
 
     public boolean validarPrerrequisitos(Estudiante estudiante) {
         for (Curso prerrequisito : prerrequisitos) {
-            if (!estudiante.generarReporteCursosAprobados().contains(prerrequisito)) {
+            if (!estudiante.hasCursoAprobado(prerrequisito)) {
                 return false;
             }
         }
         return true;
     }
 
-    public void agregarEvaluacion(Evaluacion evaluacion) {
-        evaluaciones.add(evaluacion);
+    public void agregarCurso() {
+        System.out.println("Curso " + this.nombre + " agregado al sistema.");
     }
 
-    public List<Evaluacion> obtenerEvaluaciones() {
-        return evaluaciones;
+    public void eliminarCurso() {
+        System.out.println("Curso " + this.nombre + " eliminado del sistema.");
     }
-}
+
+    public boolean validarCupos() {
+        return estudiantesInscritos.size() < 30;
+    }
+
+    public Horario generarHorario() {
+        System.out.println("Generando horario para el curso " + this.nombre);
+        return new Horario();
+    }
+
+    public boolean verificarDisponibilidad() {
+        return validarCupos();
+    }
+
+    public void mostrarEstudiantesInscritos() {
+        System.out.println("Estudiantes inscritos en el curso " + this.nombre + ":");
+        for (Estudiante estudiante : estudiantesInscritos) {
+            System.out.println("- " + estudiante.getNombre());
+        }
+    }

@@ -10,21 +10,19 @@ public class Carrera {
 
      private String codigoCarrera;
     private String nombre;
-    private int duracion; // Duración en semestres
-    private Departamento departamento;
-    private List<String> mallaCurricular;
+    private int duracion;
+    private Departamento codigoDepartamento;
+    private List<Curso> mallaCurricular;
 
-    // Constructor vacío
     public Carrera() {
         this.mallaCurricular = new ArrayList<>();
     }
 
-    // Constructor con parámetros
-    public Carrera(String codigoCarrera, String nombre, int duracion, Departamento departamento) {
+    public Carrera(String codigoCarrera, String nombre, int duracion, Departamento codigoDepartamento) {
         this.codigoCarrera = codigoCarrera;
         this.nombre = nombre;
-        setDuracion(duracion);
-        this.departamento = departamento;
+        this.duracion = duracion;
+        this.codigoDepartamento = codigoDepartamento;
         this.mallaCurricular = new ArrayList<>();
     }
 
@@ -50,58 +48,64 @@ public class Carrera {
     }
 
     public void setDuracion(int duracion) {
-        if (duracion > 0) {
-            this.duracion = duracion;
-        } else {
-            System.out.println("Error: La duración debe ser mayor a 0.");
-        }
+        this.duracion = duracion;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public Departamento getCodigoDepartamento() {
+        return codigoDepartamento;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setCodigoDepartamento(Departamento codigoDepartamento) {
+        this.codigoDepartamento = codigoDepartamento;
     }
 
-    public List<String> getMallaCurricular() {
+    public List<Curso> getMallaCurricular() {
         return mallaCurricular;
     }
 
-    // Métodos de gestión de carrera
+    // Métodos funcionales
     public void agregarCarrera() {
-        System.out.println("Carrera '" + nombre + "' agregada correctamente.");
+        System.out.println("Carrera " + this.nombre + " agregada al sistema.");
     }
 
-    public void modificarCarrera(String nuevoNombre, int nuevaDuracion, Departamento nuevoDepartamento) {
+    public void modificarCarrera(String nuevoNombre, int nuevaDuracion) {
         this.nombre = nuevoNombre;
-        setDuracion(nuevaDuracion);
-        this.departamento = nuevoDepartamento;
-        System.out.println("Carrera actualizada: " + nombre);
+        this.duracion = nuevaDuracion;
+        System.out.println("Carrera actualizada: " + this.nombre + " (Duración: " + this.duracion + " semestres).");
     }
 
     public void eliminarCarrera() {
-        System.out.println("Carrera '" + nombre + "' eliminada.");
+        System.out.println("Carrera " + this.nombre + " eliminada del sistema.");
     }
 
-    public void actualizarMallaCurricular(String materia) {
-        if (!mallaCurricular.contains(materia)) {
-            mallaCurricular.add(materia);
-            System.out.println("Materia '" + materia + "' añadida a la malla curricular de " + nombre);
-        } else {
-            System.out.println("La materia ya está en la malla curricular.");
+    public void actualizarMallaCurricular(List<Curso> nuevaMalla) {
+        this.mallaCurricular = nuevaMalla;
+        System.out.println("Malla curricular de " + this.nombre + " actualizada.");
+    }
+
+    public void agregarCursoAMalla(Curso curso) {
+        if (!mallaCurricular.contains(curso)) {
+            mallaCurricular.add(curso);
+            System.out.println("Curso " + curso.getNombre() + " agregado a la malla curricular de " + this.nombre);
         }
     }
 
-    public void mostrarMallaCurricular() {
-        System.out.println("Malla curricular de la carrera " + nombre + ":");
-        if (mallaCurricular.isEmpty()) {
-            System.out.println("No hay materias registradas.");
+    public void eliminarCursoDeMalla(Curso curso) {
+        if (mallaCurricular.remove(curso)) {
+            System.out.println("Curso " + curso.getNombre() + " eliminado de la malla curricular de " + this.nombre);
         } else {
-            for (String materia : mallaCurricular) {
-                System.out.println("- " + materia);
-            }
+            System.out.println("El curso no se encontró en la malla curricular.");
+        }
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Carrera: " + nombre);
+        System.out.println("Código: " + codigoCarrera);
+        System.out.println("Duración: " + duracion + " semestres");
+        System.out.println("Departamento: " + (codigoDepartamento != null ? codigoDepartamento.getNombre() : "No asignado"));
+        System.out.println("Cursos en la malla curricular:");
+        for (Curso curso : mallaCurricular) {
+            System.out.println(" - " + curso.getNombre());
         }
     }
 

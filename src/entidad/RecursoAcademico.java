@@ -1,29 +1,40 @@
 
-import java.io.*;
-import java.util.*;
+import java.time.LocalDateTime;
+
 
 /**
  * 
  */
 public class RecursoAcademico {
-    private String codigo_recursoAcademico;
+    private String codigoRecursoAcademico;
     private String titulo;
     private String tipo;
-    private Curso codigo_curso;
-    private String nombre;
+    private Curso codigoCurso;
     private boolean disponibilidad;
     private String ubicacion;
-    private String tipo_espacio;
+    private String tipoEspacio;
 
-    public RecursoAcademico() {
+    // Constructor por defecto
+    public RecursoAcademico() {}
+
+    // Constructor con parámetros
+    public RecursoAcademico(String codigoRecursoAcademico, String titulo, String tipo, Curso codigoCurso, boolean disponibilidad, String ubicacion, String tipoEspacio) {
+        this.codigoRecursoAcademico = codigoRecursoAcademico;
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.codigoCurso = codigoCurso;
+        this.disponibilidad = disponibilidad;
+        this.ubicacion = ubicacion;
+        this.tipoEspacio = tipoEspacio;
     }
 
-    public String getCodigo_recursoAcademico() {
-        return codigo_recursoAcademico;
+    // Getters y Setters con validaciones
+    public String getCodigoRecursoAcademico() {
+        return codigoRecursoAcademico;
     }
 
-    public void setCodigo_recursoAcademico(String codigo_recursoAcademico) {
-        this.codigo_recursoAcademico = codigo_recursoAcademico;
+    public void setCodigoRecursoAcademico(String codigoRecursoAcademico) {
+        this.codigoRecursoAcademico = codigoRecursoAcademico;
     }
 
     public String getTitulo() {
@@ -31,6 +42,9 @@ public class RecursoAcademico {
     }
 
     public void setTitulo(String titulo) {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El título no puede estar vacío.");
+        }
         this.titulo = titulo;
     }
 
@@ -39,26 +53,25 @@ public class RecursoAcademico {
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        String[] tiposValidos = {"Libro", "Artículo", "Material Multimedia", "Software", "Laboratorio"};
+        for (String t : tiposValidos) {
+            if (t.equalsIgnoreCase(tipo)) {
+                this.tipo = t;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Tipo inválido. Debe ser uno de: Libro, Artículo, Material Multimedia, Software, Laboratorio.");
     }
 
     public Curso getCodigoCurso() {
-        return codigo_curso;
+        return codigoCurso;
     }
 
-    public void setCodigoCurso(Curso codigo_curso) {
-        this.codigo_curso = codigo_curso;
+    public void setCodigoCurso(Curso codigoCurso) {
+        this.codigoCurso = codigoCurso;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public boolean getDisponibilidad() {
+    public boolean isDisponible() {
         return disponibilidad;
     }
 
@@ -75,28 +88,29 @@ public class RecursoAcademico {
     }
 
     public String getTipoEspacio() {
-        return tipo_espacio;
+        return tipoEspacio;
     }
 
-    public void setTipoEspacio(String tipo_espacio) {
-        this.tipo_espacio = tipo_espacio;
+    public void setTipoEspacio(String tipoEspacio) {
+        this.tipoEspacio = tipoEspacio;
     }
 
+    // Métodos funcionales
     public void agregarRecurso() {
-        System.out.println("Recurso agregado exitosamente.");
+        System.out.println("Recurso académico agregado: " + this.titulo);
     }
 
     public void eliminarRecurso() {
-        System.out.println("Recurso eliminado exitosamente.");
+        System.out.println("Recurso académico eliminado: " + this.titulo);
     }
 
-    public void reservarRecurso(Date fecha, String hora) {
-        if (disponibilidad) {
-            disponibilidad = false;
-            System.out.println("Recurso reservado para el " + fecha + " a las " + hora);
-        } else {
-            System.out.println("El recurso no está disponible para reserva.");
+    public void reservarRecurso(LocalDateTime fechaHora) {
+        if (!disponibilidad) {
+            System.out.println("Recurso no disponible para la reserva.");
+            return;
         }
+        System.out.println("Recurso reservado para el " + fechaHora);
+        disponibilidad = false;
     }
 
     public boolean verificarDisponibilidad() {
@@ -104,7 +118,16 @@ public class RecursoAcademico {
     }
 
     public void gestionarMantenimiento() {
-        System.out.println("El recurso está en mantenimiento.");
+        System.out.println("Mantenimiento programado para el recurso: " + this.titulo);
         disponibilidad = false;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Código: " + codigoRecursoAcademico);
+        System.out.println("Título: " + titulo);
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Ubicación: " + ubicacion);
+        System.out.println("Disponible: " + (disponibilidad ? "Sí" : "No"));
+        System.out.println("Espacio: " + tipoEspacio);
     }
 }
