@@ -1,4 +1,4 @@
-
+package entidad;
 import java.sql.Time;
 
 /**

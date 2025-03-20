@@ -1,4 +1,4 @@
-//package entidad;
+package entidad;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -39,6 +39,10 @@ public class Curso {
 
     public int getCupos() {
         return cupos;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 
     public void setCupos(int cupos) {

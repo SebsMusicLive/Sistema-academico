@@ -1,8 +1,8 @@
 package entidad;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
 
 public class HistorialAcademico {
 
@@ -24,66 +24,49 @@ public class HistorialAcademico {
         this.codigoHistorial = codigoHistorial;
         this.promedioGeneral = promedioGeneral;
         this.estudiante = estudiante;
-        this.cursosAprobados = cursosAprobados != null ? cursosAprobados : new ArrayList<>();
-        this.cursosEnProceso = cursosEnProceso != null ? cursosEnProceso : new ArrayList<>();
+        this.cursosAprobados = (cursosAprobados != null) ? new ArrayList<>(cursosAprobados) : new ArrayList<>();
+        this.cursosEnProceso = (cursosEnProceso != null) ? new ArrayList<>(cursosEnProceso) : new ArrayList<>();
     }
 
     // Getters y Setters
-    public String getCodigoHistorial() {
-        return codigoHistorial;
-    }
+    public String getCodigoHistorial() { return codigoHistorial; }
+    public void setCodigoHistorial(String codigoHistorial) { this.codigoHistorial = codigoHistorial; }
+    
+    public float getPromedioGeneral() { return promedioGeneral; }
+    public void setPromedioGeneral(float promedioGeneral) { this.promedioGeneral = promedioGeneral; }
 
-    public void setCodigoHistorial(String codigoHistorial) {
-        this.codigoHistorial = codigoHistorial;
-    }
+    public Estudiante getEstudiante() { return estudiante; }
+    public void setEstudiante(Estudiante estudiante) { this.estudiante = estudiante; }
 
-    public float getPromedioGeneral() {
-        return promedioGeneral;
-    }
-
-    public void setPromedioGeneral(float promedioGeneral) {
-        this.promedioGeneral = promedioGeneral;
-    }
-
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
-
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
-    }
-
-    public List<Curso> getCursosAprobados() {
-        return cursosAprobados;
-    }
-
-    public List<Curso> getCursosEnProceso() {
-        return cursosEnProceso;
-    }
+    public List<Curso> getCursosAprobados() { return Collections.unmodifiableList(cursosAprobados); }
+    public List<Curso> getCursosEnProceso() { return Collections.unmodifiableList(cursosEnProceso); }
 
     // Métodos
     public void consultar() {
-        System.out.println("--- Historial Académico de " + estudiante.getNombre() + " ---");
-        System.out.println("Código: " + codigoHistorial);
-        System.out.println("Promedio General: " + promedioGeneral);
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Historial Académico de ").append(estudiante.getNombre()).append(" ---\n")
+          .append("Código: ").append(codigoHistorial).append("\n")
+          .append("Promedio General: ").append(promedioGeneral).append("\n\n");
 
-        System.out.println("\nCursos en proceso:");
+        sb.append("Cursos en proceso:\n");
         if (cursosEnProceso.isEmpty()) {
-            System.out.println("No hay cursos en proceso.");
+            sb.append("No hay cursos en proceso.\n");
         } else {
             for (Curso curso : cursosEnProceso) {
-                System.out.println("- " + curso.getNombre() + " (Código: " + curso.getCodigo() + ")");
+                sb.append("- ").append(curso.getNombre()).append(" (Código: ").append(curso.getCodigo()).append(")\n");
             }
         }
 
-        System.out.println("\nCursos aprobados:");
+        sb.append("\nCursos aprobados:\n");
         if (cursosAprobados.isEmpty()) {
-            System.out.println("No hay cursos aprobados.");
+            sb.append("No hay cursos aprobados.\n");
         } else {
             for (Curso curso : cursosAprobados) {
-                System.out.println("- " + curso.getNombre() + " (Código: " + curso.getCodigo() + ")");
+                sb.append("- ").append(curso.getNombre()).append(" (Código: ").append(curso.getCodigo()).append(")\n");
             }
         }
+        
+        System.out.println(sb.toString());
     }
 
     public String generarReporteDesempeño() {
@@ -104,7 +87,8 @@ public class HistorialAcademico {
     }
 
     public void agregarCursoHistorial(Curso curso, float nota) {
-        if (nota >= 3.0) {
+        final float NOTA_APROBACION = 3.0f; // Puede cambiar según la institución
+        if (nota >= NOTA_APROBACION) {
             cursosAprobados.add(curso);
         } else {
             cursosEnProceso.add(curso);

@@ -1,4 +1,4 @@
-
+package entidad;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -22,6 +22,20 @@ public abstract class Persona{
     private Date fechaNacimiento;
 
     public Persona() {}
+
+    public class Persona {
+        public Persona(String documento, String tipoDocumento, String nombre, String correo, 
+                       String telefono, String direccion, Date fechaNacimiento) {
+            this.documento = documento;
+            this.tipoDocumento = tipoDocumento;
+            this.nombre = nombre;
+            this.correo = correo;
+            this.telefono = telefono;
+            this.direccion = direccion;
+            this.fechaNacimiento = fechaNacimiento;
+        }
+    }
+    
 
     public Persona(String documento, TipoDocumento tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
         this.documento = documento;
