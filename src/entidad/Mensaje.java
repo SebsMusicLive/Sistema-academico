@@ -7,158 +7,72 @@ import java.util.*;
  */
 public class Mensaje {
 
-    /**
-     * Default constructor
-     */
-    public Mensaje() {
-    }
-
-    /**
-     * 
-     */
     private String codigo_mensaje;
-
-    /**
-     * 
-     */
     private Chat codigo_chat;
-
-    /**
-     * 
-     */
     private Usuario codigo_emisor;
-
-    /**
-     * 
-     */
     private Usuario codigo_receptor;
-
-    /**
-     * 
-     */
     private String contenido;
-
-    /**
-     * 
-     */
     private Date fecha_envio;
 
-    /**
-     * @return
-     */
-    public String getCodigo_mensaje() {
-        // TODO implement here
-        return "";
+    public Mensaje() {
+        this.fecha_envio = new Date();
     }
 
-    /**
-     * @param codigo_mensaje 
-     * @return
-     */
-    public void setCodigo_mensaje(String codigo_mensaje) {
-        // TODO implement here
-        return null;
+    public String getCodigoMensaje() {
+        return codigo_mensaje;
     }
 
-    /**
-     * @return
-     */
+    public void setCodigoMensaje(String codigo_mensaje) {
+        this.codigo_mensaje = codigo_mensaje;
+    }
+
     public Chat getCodigoChat() {
-        // TODO implement here
-        return null;
+        return codigo_chat;
     }
 
-    /**
-     * @param codigo_chat 
-     * @return
-     */
     public void setCodigoChat(Chat codigo_chat) {
-        // TODO implement here
-        return null;
+        this.codigo_chat = codigo_chat;
     }
 
-    /**
-     * @return
-     */
     public Usuario getCodigoEmisor() {
-        // TODO implement here
-        return null;
+        return codigo_emisor;
     }
 
-    /**
-     * @param codigo_emisor 
-     * @return
-     */
     public void setCodigoEmisor(Usuario codigo_emisor) {
-        // TODO implement here
-        return null;
+        this.codigo_emisor = codigo_emisor;
     }
 
-    /**
-     * @return
-     */
     public Usuario getCodigoReceptor() {
-        // TODO implement here
-        return null;
+        return codigo_receptor;
     }
 
-    /**
-     * @param codigo_receptor 
-     * @return
-     */
     public void setCodigoReceptor(Usuario codigo_receptor) {
-        // TODO implement here
-        return null;
+        this.codigo_receptor = codigo_receptor;
     }
 
-    /**
-     * @return
-     */
     public String getContenido() {
-        // TODO implement here
-        return "";
+        return contenido;
     }
 
-    /**
-     * @param contenido 
-     * @return
-     */
     public void setContenido(String contenido) {
-        // TODO implement here
-        return null;
+        this.contenido = contenido;
     }
 
-    /**
-     * @return
-     */
     public Date getFechaEnvio() {
-        // TODO implement here
-        return null;
+        return fecha_envio;
     }
 
-    /**
-     * @param fecha_envio 
-     * @return
-     */
     public void setFechaEnvio(Date fecha_envio) {
-        // TODO implement here
-        return null;
+        this.fecha_envio = fecha_envio;
     }
 
-    /**
-     * @return
-     */
     public void enviarMensaje() {
-        // TODO implement here
-        return null;
+        System.out.println("Mensaje enviado: " + contenido);
+        this.fecha_envio = new Date();
     }
 
-    /**
-     * @return
-     */
     public void recibirMensaje() {
-        // TODO implement here
-        return null;
+        System.out.println("Mensaje recibido de " + codigo_emisor.getNombre() + ": " + contenido);
     }
 
 }
