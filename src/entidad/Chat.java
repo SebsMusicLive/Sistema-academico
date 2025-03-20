@@ -38,7 +38,7 @@ public class Chat {
      */
     public String getCodigo_chat() {
         // TODO implement here
-        return "";
+        return this.codigo_chat;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Chat {
      */
     public void setCodigo_chat(String codigo_chat) {
         // TODO implement here
-        return null;
+        this.codigo_chat = codigo_chat;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Chat {
      */
     public Date getFechaCreacion() {
         // TODO implement here
-        return null;
+        return this.fecha_creacion;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Chat {
      */
     public void setFechaCreacion(Date fecha_creacion) {
         // TODO implement here
-        return null;
+        this.fecha_creacion = fecha_creacion;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Chat {
      */
     public Usuario getCodigoUsuario1() {
         // TODO implement here
-        return null;
+        return this.codigo_usuario1;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Chat {
      */
     public void setCodigoUsuario1(Usuario codigo_usuario1) {
         // TODO implement here
-        return null;
+        this.codigo_usuario1 = codigo_usuario1;
     }
 
     /**
@@ -89,7 +89,7 @@ public class Chat {
      */
     public Usuario getCodigoUsuario2() {
         // TODO implement here
-        return null;
+        return this.codigo_usuario2;
     }
 
     /**
@@ -98,7 +98,7 @@ public class Chat {
      */
     public void setCodigoUsuario2(Usuario codigo_usuario2) {
         // TODO implement here
-        return null;
+        this.codigo_usuario2 = codigo_usuario2;
     }
 
     /**
@@ -106,7 +106,16 @@ public class Chat {
      */
     public void iniciarChat() {
         // TODO implement here
-        return null;
+        if(codigo_usuario1 == null || codigo_usuario2 == null){
+            System.out.println("No se puede iniciar un chat sin dos usuarios.");
+            return;
+        }
+
+        this.codigo_chat = UUID.randomUUID().toString();
+        this.fecha_creacion = new Date();
+
+        System.out.println("Chat iniciado con el código: " + this.codigo_chat);
+        System.out.println("Código del chat: "+ this.codigo_chat);
     }
 
     /**
@@ -114,7 +123,18 @@ public class Chat {
      */
     public void cerrarChat() {
         // TODO implement here
-        return null;
+        if(this.codigo_chat == null){
+            System.out.println("No se puede cerrar un chat que no ha sido iniciado.");
+            return;
+        }
+
+        System.out.println("El chat con código "+this.codigo_chat+ " ha sido cerrado.");
+        
+        this.codigo_chat = null;
+        this.fecha_creacion = null;
+        this.codigo_usuario1 = null;
+        this.codigo_usuario2 = null;
+        
     }
 
 }
