@@ -23,11 +23,11 @@ public class Usuario {
         this.sesionActiva = false;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoUsuario() {
+        return this.codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigoUsuario(String codigo) {
         this.codigo = codigo;
     }
 

@@ -1,4 +1,4 @@
-package entidad;
+//package entidad;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ public class Curso {
         this.prerrequisitos = new ArrayList<>();
     }
 
-    public String getCodigo() {
+    public String getCodigoCurso() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigoCurso(String codigo) {
         this.codigo = codigo;
     }
 
@@ -78,7 +78,7 @@ public class Curso {
 
     public boolean validarPrerrequisitos(Estudiante estudiante) {
         for (Curso prerrequisito : prerrequisitos) {
-            if (!estudiante.haCursado(prerrequisito)) {
+            if (!estudiante.generarReporteCursosAprobados().contains(prerrequisito)) {
                 return false;
             }
         }
