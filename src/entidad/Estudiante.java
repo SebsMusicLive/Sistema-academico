@@ -8,38 +8,38 @@ import java.util.List;
  */
 public class Estudiante extends Persona {
 
-   private String codigoEstudiante;
-    private Carrera carrera;
+   private String codigo_estudiante;
+    private Carrera codigo_carrera;
     private int semestre;
-    private List<Curso> cursosInscritos; // Lista de cursos en los que está inscrito
+    private List<Curso> cursosInscritos;
 
     public Estudiante() {
         this.cursosInscritos = new ArrayList<>();
     }
 
-    public Estudiante(String documento, String tipoDocumento, String nombre, String correo, String telefono, 
-                      String direccion, Date fechaNacimiento, String codigoEstudiante, Carrera carrera, int semestre) {
+    public Estudiante(String documento, TipoDocumento tipoDocumento, String nombre, String correo, String telefono,
+                      String direccion, Date fechaNacimiento, String codigo_estudiante, Carrera codigo_carrera, int semestre) {
         super(documento, tipoDocumento, nombre, correo, telefono, direccion, fechaNacimiento);
-        this.codigoEstudiante = codigoEstudiante;
-        this.carrera = carrera;
+        this.codigo_estudiante = codigo_estudiante;
+        this.codigo_carrera = codigo_carrera;
         this.semestre = semestre;
         this.cursosInscritos = new ArrayList<>();
     }
 
     public String getCodigoEstudiante() {
-        return codigoEstudiante;
+        return codigo_estudiante;
     }
 
-    public void setCodigoEstudiante(String codigoEstudiante) {
-        this.codigoEstudiante = codigoEstudiante;
+    public void setCodigoEstudiante(String codigo_estudiante) {
+        this.codigo_estudiante = codigo_estudiante;
     }
 
-    public Carrera getCarrera() {
-        return carrera;
+    public Carrera getCodigoCarrera() {
+        return codigo_carrera;
     }
 
-    public void setCarrera(Carrera carrera) {
-        this.carrera = carrera;
+    public void setCodigoCarrera(Carrera codigo_carrera) {
+        this.codigo_carrera = codigo_carrera;
     }
 
     public int getSemestre() {
@@ -88,7 +88,6 @@ public class Estudiante extends Persona {
     }
 
     public boolean validarPrerrequisitos(Curso curso) {
-        // Aquí se validaría si el estudiante ha aprobado cursos previos requeridos
         System.out.println("Validando prerrequisitos para " + curso.getNombre());
         return true;
     }
@@ -106,8 +105,8 @@ public class Estudiante extends Persona {
     @Override
     public String toString() {
         return "Estudiante{" +
-                "codigoEstudiante='" + codigoEstudiante + '\'' +
-                ", carrera=" + (carrera != null ? carrera.getNombre() : "No asignada") +
+                "codigo_estudiante='" + codigo_estudiante + '\'' +
+                ", codigo_carrera=" + (codigo_carrera != null ? codigo_carrera.getNombre() : "No asignada") +
                 ", semestre=" + semestre +
                 ", cursosInscritos=" + cursosInscritos.size() +
                 '}';

@@ -4,13 +4,17 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 
+enum TipoDocumento {
+    CC, TI, PASAPORTE;
+}
+
 
 /**
  * 
  */
-public class Persona {
-  private String documento;
-    private String tipoDocumento;
+public abstract class Persona{
+   private String codigo_persona;
+    private TipoDocumento tipoDocumento;
     private String nombre;
     private String correo;
     private String telefono;
@@ -19,8 +23,8 @@ public class Persona {
 
     public Persona() {}
 
-    public Persona(String documento, String tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
-        this.documento = documento;
+    public Persona(String codigo_persona, TipoDocumento tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
+        this.codigo_persona = codigo_persona;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
         setCorreo(correo);
@@ -29,19 +33,19 @@ public class Persona {
         setFechaNacimiento(fechaNacimiento);
     }
 
-    public String getDocumento() {
-        return documento;
+    public String getCodigo_persona() {
+        return codigo_persona;
     }
 
-    public void setDocumento(String documento) {
-        this.documento = documento;
+    public void setCodigo_persona(String codigo_persona) {
+        this.codigo_persona = codigo_persona;
     }
 
-    public String getTipoDocumento() {
+    public TipoDocumento getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 
@@ -50,7 +54,11 @@ public class Persona {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre;
+        } else {
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        }
     }
 
     public String getCorreo() {
@@ -109,8 +117,8 @@ public class Persona {
     }
 
     public void eliminarDatos() {
-        this.documento = "";
-        this.tipoDocumento = "";
+        this.codigo_persona = "";
+        this.tipoDocumento = null;
         this.nombre = "";
         this.correo = "";
         this.telefono = "";
@@ -124,7 +132,7 @@ public class Persona {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaNac = (fechaNacimiento != null) ? sdf.format(fechaNacimiento) : "No registrada";
         return "Persona{" +
-                "documento='" + documento + '\'' +
+                "codigo_persona='" + codigo_persona + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
