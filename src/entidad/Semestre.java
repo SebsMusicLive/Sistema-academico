@@ -38,7 +38,7 @@ public class Semestre {
      */
     public String getCodigoSemestre() {
         // TODO implement here
-        return "";
+        return this.codigo_semestre;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Semestre {
      */
     public void setCodigoSemestre(String codigo_semestre) {
         // TODO implement here
-        return null;
+        this.codigo_semestre = codigo_semestre;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Semestre {
      */
     public int getNumero() {
         // TODO implement here
-        return 0;
+        return this.numero;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Semestre {
      */
     public void setNumero(int numero) {
         // TODO implement here
-        return null;
+        this.numero = numero;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Semestre {
      */
     public Date getFechaInicio() {
         // TODO implement here
-        return null;
+        return this.fecha_inicio;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Semestre {
      */
     public void setFechaInicio(Date fecha_inicio) {
         // TODO implement here
-        return null;
+        this.fecha_inicio = fecha_inicio;
     }
 
     /**
@@ -89,7 +89,7 @@ public class Semestre {
      */
     public Date getFechaFin() {
         // TODO implement here
-        return null;
+        return this.fecha_fin;
     }
 
     /**
@@ -98,7 +98,7 @@ public class Semestre {
      */
     public void setFechaFin(Date fecha_fin) {
         // TODO implement here
-        return null;
+        this.fecha_fin = fecha_fin;
     }
 
     /**
@@ -108,7 +108,19 @@ public class Semestre {
      */
     public void definirFechasInicioFin(Date fecha_inicio, Date fecha_fin) {
         // TODO implement here
-        return null;
+        if (fecha_inicio == null || fecha_fin == null) {
+            System.out.println("Las fechas no pueden ser nulas.");
+            return;
+        }
+        
+        if (fecha_inicio.after(fecha_fin)) {
+            System.out.println("Error: La fecha de inicio no puede ser posterior a la fecha de fin.");
+            return;
+        }
+
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
+        System.out.println("Fechas del semestre definidas: Inicio " + fecha_inicio + ", Fin " + fecha_fin);
     }
 
     /**
@@ -116,7 +128,16 @@ public class Semestre {
      */
     public void cerrarSemestre() {
         // TODO implement here
-        return null;
+        Date fechaActual = new Date();
+
+        if (this.fecha_fin != null && fechaActual.after(this.fecha_fin)) {
+            System.out.println("El semestre ya ha finalizado anteriormente.");
+            return;
+        }
+
+        this.fecha_fin = fechaActual;
+        System.out.println("El semestre ha sido cerrado en la fecha: " + this.fecha_fin);
+        
     }
 
     /**
@@ -124,7 +145,15 @@ public class Semestre {
      */
     public String generarCalendarioAcademico() {
         // TODO implement here
-        return "";
+        if (this.fecha_inicio == null || this.fecha_fin == null) {
+            return "No se han definido las fechas del semestre.";
+        }
+
+        return "Calendario Académico:\n" +
+               "Código del Semestre: " + this.codigo_semestre + "\n" +
+               "Número de Semestre: " + this.numero + "\n" +
+               "Fecha de Inicio: " + this.fecha_inicio + "\n" +
+               "Fecha de Fin: " + this.fecha_fin;
     }
 
 }

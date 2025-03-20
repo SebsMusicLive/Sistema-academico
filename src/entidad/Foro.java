@@ -1,173 +1,96 @@
-
-import java.io.*;
 import java.util.*;
 
-/**
- * 
- */
 public class Foro {
 
-    /**
-     * Default constructor
-     */
-    public Foro() {
-    }
-
-    /**
-     * 
-     */
     private String codigo_foro;
-
-    /**
-     * 
-     */
     private Curso codigo_curso;
-
-    /**
-     * 
-     */
     private String titulo;
-
-    /**
-     * 
-     */
     private String descripcion;
-
-    /**
-     * 
-     */
     private Date fecha_creacion;
-
-    /**
-     * 
-     */
     private Usuario codigo_creador;
+    private List<Mensaje> mensajes;  // Lista para almacenar los mensajes del foro
 
-    /**
-     * @return
-     */
-    public String getCodigo_foro() {
-        // TODO implement here
-        return "";
+    public Foro() {
+        this.mensajes = new ArrayList<>();  // Inicializamos la lista de mensajes
     }
 
-    /**
-     * @param codigo_foro 
-     * @return
-     */
-    public void setCodigo_foro(String codigo_foro) {
-        // TODO implement here
-        return null;
+    public String getCodigoForo() {
+        return this.codigo_foro;
     }
 
-    /**
-     * @return
-     */
+    public void setCodigoForo(String codigo_foro) {
+        this.codigo_foro = codigo_foro;
+    }
+
     public Curso getCodigoCurso() {
-        // TODO implement here
-        return null;
+        return this.codigo_curso;
     }
 
-    /**
-     * @param codigo_curso 
-     * @return
-     */
     public void setCodigoCurso(Curso codigo_curso) {
-        // TODO implement here
-        return null;
+        this.codigo_curso = codigo_curso;
     }
 
-    /**
-     * @return
-     */
     public String getTitulo() {
-        // TODO implement here
-        return "";
+        return this.titulo;
     }
 
-    /**
-     * @param titulo 
-     * @return
-     */
     public void setTitulo(String titulo) {
-        // TODO implement here
-        return null;
+        this.titulo = titulo;
     }
 
-    /**
-     * @return
-     */
     public String getDescripcion() {
-        // TODO implement here
-        return "";
+        return this.descripcion;
     }
 
-    /**
-     * @param descripcion 
-     * @return
-     */
     public void setDescripcion(String descripcion) {
-        // TODO implement here
-        return null;
+        this.descripcion = descripcion;
     }
 
-    /**
-     * @return
-     */
     public Date getFechaCreacion() {
-        // TODO implement here
-        return null;
+        return this.fecha_creacion;
     }
 
-    /**
-     * @param fecha_creacion 
-     * @return
-     */
     public void setFechaCreacion(Date fecha_creacion) {
-        // TODO implement here
-        return null;
+        this.fecha_creacion = fecha_creacion;
     }
 
-    /**
-     * @return
-     */
     public Usuario getCodigoCreador() {
-        // TODO implement here
-        return null;
+        return this.codigo_creador;
     }
 
-    /**
-     * @param codigo_creador 
-     * @return
-     */
     public void setCodigoCreador(Usuario codigo_creador) {
-        // TODO implement here
-        return null;
+        this.codigo_creador = codigo_creador;
+    }
+
+    public List<Mensaje> getMensajes() {
+        return this.mensajes;
     }
 
     /**
-     * @return
+     * Método para crear un foro con la fecha actual.
      */
     public void crearForo() {
-        // TODO implement here
-        return null;
+        this.fecha_creacion = new Date(); // Asigna la fecha actual
+        System.out.println("Foro creado con éxito: " + this.titulo + " el " + this.fecha_creacion);
     }
 
     /**
-     * @return
+     * Método para cerrar el foro.
      */
     public void cerrarForo() {
-        // TODO implement here
-        return null;
+        System.out.println("El foro '" + this.titulo + "' ha sido cerrado.");
+        this.mensajes.clear(); // Opcional: eliminar mensajes al cerrar el foro
     }
 
     /**
-     * @param mensaje 
-     * @return
+     * Método para agregar un mensaje al foro.
      */
     public void agregarMensaje(Mensaje mensaje) {
-        // TODO implement here
-        return null;
+        if (mensaje != null) {
+            this.mensajes.add(mensaje);
+            System.out.println("Mensaje agregado por " + mensaje.getCodigoUsuario().getNombre() + ": " + mensaje.getContenido());
+        } else {
+            System.out.println("No se puede agregar un mensaje nulo.");
+        }
     }
-
 }
