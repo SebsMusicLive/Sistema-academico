@@ -13,7 +13,7 @@ enum TipoDocumento {
  * 
  */
 public abstract class Persona{
-   private String codigo_persona;
+   private String documento;
     private TipoDocumento tipoDocumento;
     private String nombre;
     private String correo;
@@ -23,8 +23,8 @@ public abstract class Persona{
 
     public Persona() {}
 
-    public Persona(String codigo_persona, TipoDocumento tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
-        this.codigo_persona = codigo_persona;
+    public Persona(String documento, TipoDocumento tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
+        this.documento = documento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
         setCorreo(correo);
@@ -33,12 +33,12 @@ public abstract class Persona{
         setFechaNacimiento(fechaNacimiento);
     }
 
-    public String getCodigo_persona() {
-        return codigo_persona;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setCodigo_persona(String codigo_persona) {
-        this.codigo_persona = codigo_persona;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public TipoDocumento getTipoDocumento() {
@@ -117,7 +117,7 @@ public abstract class Persona{
     }
 
     public void eliminarDatos() {
-        this.codigo_persona = "";
+        this.documento = "";
         this.tipoDocumento = null;
         this.nombre = "";
         this.correo = "";
@@ -132,7 +132,7 @@ public abstract class Persona{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaNac = (fechaNacimiento != null) ? sdf.format(fechaNacimiento) : "No registrada";
         return "Persona{" +
-                "codigo_persona='" + codigo_persona + '\'' +
+                "documento='" + documento + '\'' +
                 ", tipoDocumento='" + tipoDocumento + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
