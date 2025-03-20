@@ -6,229 +6,105 @@ import java.util.*;
  * 
  */
 public class RecursoAcademico {
+    private String codigo_recursoAcademico;
+    private String titulo;
+    private String tipo;
+    private Curso codigo_curso;
+    private String nombre;
+    private boolean disponibilidad;
+    private String ubicacion;
+    private String tipo_espacio;
 
-    /**
-     * Default constructor
-     */
     public RecursoAcademico() {
     }
 
-    /**
-     * 
-     */
-    private String codigo_recursoAcademico;
-
-    /**
-     * 
-     */
-    private String titulo;
-
-    /**
-     * 
-     */
-    private String tipo;
-
-    /**
-     * 
-     */
-    private Curso codigo_curso;
-
-    /**
-     * 
-     */
-    private String nombre;
-
-    /**
-     * 
-     */
-    private boolean disponibilidad;
-
-    /**
-     * 
-     */
-    private String ubicacion;
-
-    /**
-     * 
-     */
-    private String tipo_espacio;
-
-    /**
-     * @return
-     */
     public String getCodigo_recursoAcademico() {
-        // TODO implement here
-        return "";
+        return codigo_recursoAcademico;
     }
 
-    /**
-     * @param codigo_recursoAcademico 
-     * @return
-     */
     public void setCodigo_recursoAcademico(String codigo_recursoAcademico) {
-        // TODO implement here
-        return null;
+        this.codigo_recursoAcademico = codigo_recursoAcademico;
     }
 
-    /**
-     * @return
-     */
     public String getTitulo() {
-        // TODO implement here
-        return "";
+        return titulo;
     }
 
-    /**
-     * @param titulo 
-     * @return
-     */
     public void setTitulo(String titulo) {
-        // TODO implement here
-        return null;
+        this.titulo = titulo;
     }
 
-    /**
-     * @return
-     */
     public String getTipo() {
-        // TODO implement here
-        return "";
+        return tipo;
     }
 
-    /**
-     * @param tipo 
-     * @return
-     */
     public void setTipo(String tipo) {
-        // TODO implement here
-        return null;
+        this.tipo = tipo;
     }
 
-    /**
-     * @return
-     */
     public Curso getCodigoCurso() {
-        // TODO implement here
-        return null;
+        return codigo_curso;
     }
 
-    /**
-     * @param codigo_curso 
-     * @return
-     */
     public void setCodigoCurso(Curso codigo_curso) {
-        // TODO implement here
-        return null;
+        this.codigo_curso = codigo_curso;
     }
 
-    /**
-     * @return
-     */
     public String getNombre() {
-        // TODO implement here
-        return "";
+        return nombre;
     }
 
-    /**
-     * @param nombre 
-     * @return
-     */
     public void setNombre(String nombre) {
-        // TODO implement here
-        return null;
+        this.nombre = nombre;
     }
 
-    /**
-     * @return
-     */
     public boolean getDisponibilidad() {
-        // TODO implement here
-        return false;
+        return disponibilidad;
     }
 
-    /**
-     * @param disponibilidad 
-     * @return
-     */
     public void setDisponibilidad(boolean disponibilidad) {
-        // TODO implement here
-        return null;
+        this.disponibilidad = disponibilidad;
     }
 
-    /**
-     * @return
-     */
     public String getUbicacion() {
-        // TODO implement here
-        return "";
+        return ubicacion;
     }
 
-    /**
-     * @param ubicacion 
-     * @return
-     */
     public void setUbicacion(String ubicacion) {
-        // TODO implement here
-        return null;
+        this.ubicacion = ubicacion;
     }
 
-    /**
-     * @return
-     */
     public String getTipoEspacio() {
-        // TODO implement here
-        return "";
+        return tipo_espacio;
     }
 
-    /**
-     * @param tipo_espacio 
-     * @return
-     */
     public void setTipoEspacio(String tipo_espacio) {
-        // TODO implement here
-        return null;
+        this.tipo_espacio = tipo_espacio;
     }
 
-    /**
-     * @return
-     */
     public void agregarRecurso() {
-        // TODO implement here
-        return null;
+        System.out.println("Recurso agregado exitosamente.");
     }
 
-    /**
-     * @return
-     */
     public void eliminarRecurso() {
-        // TODO implement here
-        return null;
+        System.out.println("Recurso eliminado exitosamente.");
     }
 
-    /**
-     * @param fecha 
-     * @param hora 
-     * @return
-     */
     public void reservarRecurso(Date fecha, String hora) {
-        // TODO implement here
-        return null;
+        if (disponibilidad) {
+            disponibilidad = false;
+            System.out.println("Recurso reservado para el " + fecha + " a las " + hora);
+        } else {
+            System.out.println("El recurso no está disponible para reserva.");
+        }
     }
 
-    /**
-     * @return
-     */
     public boolean verificarDisponibilidad() {
-        // TODO implement here
-        return false;
+        return disponibilidad;
     }
 
-    /**
-     * @return
-     */
     public void gestionarMantenimiento() {
-        // TODO implement here
-        return null;
+        System.out.println("El recurso está en mantenimiento.");
+        disponibilidad = false;
     }
-
 }
