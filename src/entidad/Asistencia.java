@@ -43,16 +43,16 @@ public class Asistencia {
      */
     public String getCodigo_asistencia() {
         // TODO implement here
-        return "";
+        return this.codigo_asistencia;
     }
 
     /**
      * @param codigo_asistencia 
      * @return
      */
-    public void setCodigo_asistencia(String codigo_asistencia) {
+    public void setCodigo_asistencia(String codigo_asistencia) {    
         // TODO implement here
-        return null;
+        this.codigo_asistencia = codigo_asistencia;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Asistencia {
      */
     public Estudiante getCodigoEstudiante() {
         // TODO implement here
-        return null;
+        return this.codigo_estudiante;
     }
 
     /**
@@ -69,7 +69,7 @@ public class Asistencia {
      */
     public void setCodigoEstudiante(Estudiante codigo_estudiante) {
         // TODO implement here
-        return null;
+        this.codigo_estudiante = codigo_estudiante;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Asistencia {
      */
     public Curso getCodigoCurso() {
         // TODO implement here
-        return null;
+        return this.codigo_curso;
     }
 
     /**
@@ -86,7 +86,7 @@ public class Asistencia {
      */
     public void setCodigoCurso(Curso codigo_curso) {
         // TODO implement here
-        return null;
+        this.codigo_curso = codigo_curso;
     }
 
     /**
@@ -94,7 +94,7 @@ public class Asistencia {
      */
     public Date getFecha() {
         // TODO implement here
-        return null;
+        return this.fecha;
     }
 
     /**
@@ -103,7 +103,7 @@ public class Asistencia {
      */
     public void setFecha(Date fecha) {
         // TODO implement here
-        return null;
+        this.fecha = fecha;
     }
 
     /**
@@ -111,7 +111,7 @@ public class Asistencia {
      */
     public boolean isPresente() {
         // TODO implement here
-        return false;
+        return this.presente;
     }
 
     /**
@@ -120,7 +120,7 @@ public class Asistencia {
      */
     public void setPresente(boolean presente) {
         // TODO implement here
-        return null;
+        this.presente = presente;
     }
 
     /**
@@ -128,7 +128,10 @@ public class Asistencia {
      */
     public void registrarAsistencia() {
         // TODO implement here
-        return null;
+        this.presente = true;
+        this.fecha = new Date(); //Se registra la fecha actual
+        System.out.println("Asistencia registrada: "+codigo_asistencia);
+        
     }
 
     /**
@@ -136,7 +139,13 @@ public class Asistencia {
      */
     public void justificarInasistencias() {
         // TODO implement here
-        return null;
+        if(!this.presente){
+            this.presente = true;
+            this.fecha = new Date(); //Se registra la fecha actual
+            System.out.println("Inasistencia justificada: "+codigo_asistencia);
+        }else{
+            System.out.println("El estudiante ya estaba presente.");
+        }
     }
 
     /**
@@ -144,7 +153,12 @@ public class Asistencia {
      */
     public String generarReporteInasistencias() {
         // TODO implement here
-        return "";
+        if(this.presente){
+            return "El estudiante " + this.codigo_estudiante.getNombre() + " estuvo presente en el curso " + this.codigo_curso.getNombre() + " el " + this.fecha;
+        }
+        else{
+            return "El estudiante " + this.codigo_estudiante.getNombre() + " no estuvo presente en el curso " + this.codigo_curso.getNombre() + " el " + this.fecha;
+        }
     }
 
 }
