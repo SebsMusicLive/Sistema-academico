@@ -6,7 +6,7 @@ import java.util.Objects;
  */
 public class Calificación {
 
-     private String codigoCalificacion;
+    private String codigoCalificacion;
     private float nota;
     private Estudiante estudiante;
     private Evaluacion evaluacion;
