@@ -1,16 +1,20 @@
-
+package entidad;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
 
+enum TipoDocumento {
+    CC, TI, PASAPORTE;
+}
+
 
 /**
  * 
  */
-public class Persona {
-  private String documento;
-    private String tipoDocumento;
+public abstract class Persona{
+   private String documento;
+    private TipoDocumento tipoDocumento;
     private String nombre;
     private String correo;
     private String telefono;
@@ -19,7 +23,21 @@ public class Persona {
 
     public Persona() {}
 
-    public Persona(String documento, String tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
+    public class Persona {
+        public Persona(String documento, String tipoDocumento, String nombre, String correo, 
+                       String telefono, String direccion, Date fechaNacimiento) {
+            this.documento = documento;
+            this.tipoDocumento = tipoDocumento;
+            this.nombre = nombre;
+            this.correo = correo;
+            this.telefono = telefono;
+            this.direccion = direccion;
+            this.fechaNacimiento = fechaNacimiento;
+        }
+    }
+    
+
+    public Persona(String documento, TipoDocumento tipoDocumento, String nombre, String correo, String telefono, String direccion, Date fechaNacimiento) {
         this.documento = documento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
@@ -37,11 +55,11 @@ public class Persona {
         this.documento = documento;
     }
 
-    public String getTipoDocumento() {
+    public TipoDocumento getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 
@@ -50,7 +68,11 @@ public class Persona {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre;
+        } else {
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        }
     }
 
     public String getCorreo() {
@@ -110,7 +132,7 @@ public class Persona {
 
     public void eliminarDatos() {
         this.documento = "";
-        this.tipoDocumento = "";
+        this.tipoDocumento = null;
         this.nombre = "";
         this.correo = "";
         this.telefono = "";

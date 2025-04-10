@@ -1,3 +1,4 @@
+package entidad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,19 +10,17 @@ public class Departamento {
 
     private String codigoDepartamento;
     private String nombre;
-    private Facultad facultad;
-    private List<Docente> docentes;
+    private Facultad codigoFacultad;
+    private List<Docente> docentes; // Lista de docentes en el departamento
 
-    // Constructor vacío
     public Departamento() {
         this.docentes = new ArrayList<>();
     }
 
-    // Constructor con parámetros
-    public Departamento(String codigoDepartamento, String nombre, Facultad facultad) {
+    public Departamento(String codigoDepartamento, String nombre, Facultad codigoFacultad) {
         this.codigoDepartamento = codigoDepartamento;
         this.nombre = nombre;
-        this.facultad = facultad;
+        this.codigoFacultad = codigoFacultad;
         this.docentes = new ArrayList<>();
     }
 
@@ -42,27 +41,26 @@ public class Departamento {
         this.nombre = nombre;
     }
 
-    public Facultad getFacultad() {
-        return facultad;
+    public Facultad getCodigoFacultad() {
+        return codigoFacultad;
     }
 
-    public void setFacultad(Facultad facultad) {
-        this.facultad = facultad;
+    public void setCodigoFacultad(Facultad codigoFacultad) {
+        this.codigoFacultad = codigoFacultad;
     }
 
     public List<Docente> getDocentes() {
         return docentes;
     }
 
-    // Métodos de gestión del departamento
+    // Métodos funcionales
     public void agregarDepartamento() {
-        System.out.println("Departamento '" + nombre + "' agregado correctamente.");
+        System.out.println("Departamento '" + nombre + "' agregado con éxito.");
     }
 
-    public void modificarDepartamento(String nuevoNombre, Facultad nuevaFacultad) {
+    public void modificarDepartamento(String nuevoNombre) {
         this.nombre = nuevoNombre;
-        this.facultad = nuevaFacultad;
-        System.out.println("Departamento actualizado: " + nombre);
+        System.out.println("Departamento actualizado a: " + nuevoNombre);
     }
 
     public void eliminarDepartamento() {
@@ -70,22 +68,18 @@ public class Departamento {
     }
 
     public void asignarDocente(Docente docente) {
-        if (!docentes.contains(docente)) {
+        if (docente != null) {
             docentes.add(docente);
             System.out.println("Docente " + docente.getNombre() + " asignado al departamento " + nombre);
         } else {
-            System.out.println("El docente ya pertenece a este departamento.");
+            System.out.println("No se puede asignar un docente nulo.");
         }
     }
 
-    public void listarDocentes() {
-        System.out.println("Docentes en el departamento " + nombre + ":");
-        if (docentes.isEmpty()) {
-            System.out.println("No hay docentes asignados.");
-        } else {
-            for (Docente docente : docentes) {
-                System.out.println("- " + docente.getNombre());
-            }
-        }
+    public void mostrarInformacion() {
+        System.out.println("Código de Departamento: " + codigoDepartamento);
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Facultad: " + (codigoFacultad != null ? codigoFacultad.getNombre() : "No asignada"));
+        System.out.println("Docentes Asignados: " + (docentes.isEmpty() ? "Ninguno" : docentes.size()));
     }
 }

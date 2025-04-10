@@ -1,5 +1,4 @@
-
-import java.io.*;
+package entidad;
 import java.util.*;
 
 /**

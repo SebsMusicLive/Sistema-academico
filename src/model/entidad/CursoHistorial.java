@@ -1,3 +1,4 @@
+package entidad;
 
 import java.io.*;
 import java.util.*;
@@ -5,8 +6,7 @@ import java.util.*;
 /**
  * 
  */
-public class RecursoAcademico {
-    private String codigo_recursoAcademico;
+ private String codigo_recursoAcademico;
     private String titulo;
     private String tipo;
     private Curso codigo_curso;
@@ -107,4 +107,5 @@ public class RecursoAcademico {
         System.out.println("El recurso está en mantenimiento.");
         disponibilidad = false;
     }
+
 }
